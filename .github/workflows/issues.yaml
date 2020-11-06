@@ -1,0 +1,14 @@
+name: Issues Actions Workflow
+
+on: 
+  issues:
+    types: [opened]
+
+jobs: 
+  run-shell-command:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: print issue description
+        run: |
+          curl --url https://api.github.com/repos/${{ github.repository }}/issues \
+          --header 'content-type: application/json'
