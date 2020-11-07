@@ -7,6 +7,8 @@ on:
 jobs: 
   run-shell-command:
     runs-on: ubuntu-latest
+    env:
+      output: ""
     steps: 
       - name: Checout Repo Content
         uses: actions/checkout@v2 #Check out the repository content
