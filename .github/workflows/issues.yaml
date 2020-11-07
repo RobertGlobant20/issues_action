@@ -8,7 +8,16 @@ jobs:
   run-shell-command:
     runs-on: ubuntu-latest
     steps: 
-      - name: print issue description
+      - name: Checout Repo Content
+        uses: actions/checkout@v2 #Check out the repository content
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install Python Dependencies
         run: |
-          curl --url https://api.github.com/repos/${{ github.repository }}/issues \
-          --header 'content-type: application/json'
+          python -m pip install --upgrade pip
+          pip install requests
+      - name: execute py script
+        run: |
+          python get_issues_info.py
