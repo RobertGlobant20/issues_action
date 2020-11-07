@@ -22,11 +22,10 @@ jobs:
           pip install requests
       - name: execute py script
         run: |
-          output: $(python get_issues_info.py)
-          echo "::set-output name=changelog::$output"
+          echo "::set-output name=changelog::$(python get_issues_info.py)"
         id: run_python_script
       - name: Send Slack Message
         uses: docker://technosophos/slack-notify
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_MESSAGE: "Hello Slack Robert ${{ steps.run_python_script.outputs.changelog }}" 
+          SLACK_MESSAGE: ${{join(steps.run_python_script.outputs.*, '\n')}} 
