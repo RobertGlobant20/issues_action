@@ -21,3 +21,8 @@ jobs:
       - name: execute py script
         run: |
           python get_issues_info.py
+      - name: Send Slack Message
+        uses: docker://technosophos/slack-notify
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_MESSAGE: "Hello Slack Robert"
