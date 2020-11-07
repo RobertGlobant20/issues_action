@@ -31,4 +31,4 @@ jobs:
         uses: docker://technosophos/slack-notify
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_MESSAGE: ${{ steps.step1.outputs.changelog }} 
+          SLACK_MESSAGE: ${{ steps.run_python_script.outputs.changelog }} 
