@@ -33,8 +33,15 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_MESSAGE: ${{ steps.run_python_script.outputs.changelog }} 
       - name: Label Issues
-        uses: Naturalclar/issue-action@v2.0.2
+        uses: github/issue-labeler@v2.0
         with:
-          title-or-body: "both"
-          parameters: '[ {"keywords": ["bug", "error"], "labels": ["BUG"]}, {"keywords": ["help", "guidance"], "labels": ["help-wanted"]}]'
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          configuration-path: .github/labeler.yml
+          not-before: 2020-01-15T02:54:32Z
+          enable-versioned-regex: 0
+      #- name: Label Issues
+       # uses: Naturalclar/issue-action@v2.0.2
+        #with:
+         # title-or-body: "both"
+          #parameters: '[ {"keywords": ["bug", "error"], "labels": ["BUG"]}, {"keywords": ["help", "guidance"], "labels": ["help-wanted"]}]'
+          #github-token: "${{ secrets.GITHUB_TOKEN }}"
