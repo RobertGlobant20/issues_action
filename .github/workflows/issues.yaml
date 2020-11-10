@@ -32,3 +32,9 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_MESSAGE: ${{ steps.run_python_script.outputs.changelog }} 
+      - name: Label Issues
+        uses: Naturalclar/issue-action@v2.0.2
+        with:
+          title-or-body: "both"
+          parameters: '[ {"keywords": ["bug", "error"], "labels": ["BUG"]}, {"keywords": ["help", "guidance"], "labels": ["help-wanted"]}]'
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
