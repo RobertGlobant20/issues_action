@@ -50,7 +50,7 @@ jobs:
           # Literal body:
           body: A new issue has been created!
           to: roberto.tellez@globant.com
-          from: Issues Manager # <user@example.com>
+          from: aragontiger20@gmail.com # <user@example.com>
           # Optional content type (defaults to text/plain):
           content_type: text/html
       #- name: Label Issues
