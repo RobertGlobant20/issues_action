@@ -1,6 +1,6 @@
 revit:
     - '(revit|REVIT|Revit)'
 bug:
-    - '(bug/gi)'
+    - '(bug|BUG|Bug)'
 crash:
     - '(crash|CRASH|Crash)'
