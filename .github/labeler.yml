@@ -1,5 +1,6 @@
-# Add/remove 'critical' label if issue contains the words 'urgent' or 'critical'
-critical:
-    - '(critical|urgent)'
+revit:
+    - '(revit)'
 bug:
-    - '(bug|BUG)'
+    - '(bug)'
+crash:
+    - '(crash)'
