@@ -10,7 +10,7 @@ jobs:
     env:
       output: ""
     steps: 
-      - name: Checout Repo Content
+      - name: Checkout Repo Content
         uses: actions/checkout@v2 #Check out the repository content
       - name: Setup Python
         uses: actions/setup-python@v2

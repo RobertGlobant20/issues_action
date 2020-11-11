@@ -2,10 +2,10 @@ import requests
 import shutil
 import json
 
-#REPO = "GitHub_Actions"
-REPO = "Dynamo"
-#USER = "RobertGlobant20"
-USER = "DynamoDS"
+REPO = "issues_action"
+#REPO = "Dynamo"
+USER = "RobertGlobant20"
+#USER = "DynamoDS"
 
 url = "https://api.github.com/repos/"+USER+"/"+REPO+"/issues"
     
