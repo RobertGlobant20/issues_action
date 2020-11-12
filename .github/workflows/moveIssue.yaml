@@ -2,21 +2,31 @@ name: Create Issue on other repo V1
 
 on: 
   issues:
-    types: [labeled]
+    types: [opened]
 
 jobs: 
   gitIssueCreation:
     name: Git Creation Demo
     runs-on: ubuntu-latest
     steps:
-      - uses: maxkomarychev/oction-create-issue@v0.7.1
+      - name: Create Issue Repo1
+        uses: maxkomarychev/oction-create-issue@v0.7.1
         id: my_step_id
         with:
-          token: ${{ secrets.GITHUB_TOKEN2 }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           owner: 'Astul-Betizagasti'
           repo: 'IssueTest'
           title: 'Issue sent from other repo'
           body: 'Body content yeh'
+      - name: Create Issue Repo2
+        uses: maxkomarychev/oction-create-issue@v0.7.1
+        id: my_step_id2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          owner: 'Astul-Betizagasti'
+          repo: 'IssueTest2'
+          title: 'Issue sent from other repo2'
+          body: 'Body content yeh2'
       - name: Print outputs
         run: |
           echo ${{ steps.my_step_id.outputs.id }}
