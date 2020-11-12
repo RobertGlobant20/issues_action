@@ -8,7 +8,6 @@ jobs:
   gitIssueCreation:
     name: Git Creation Demo
     runs-on: ubuntu-latest
-    if: contains(github.event.issue.labels.*.name, 'critical')
     steps:
       - name: (Label bug) Move to astul repo
         uses: maxkomarychev/oction-create-issue@v0.7.1
