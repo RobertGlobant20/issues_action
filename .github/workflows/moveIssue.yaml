@@ -1,4 +1,4 @@
-name: Create Issue on other repo
+name: Create Issue on other repo V1
 
 on: 
   issues:
@@ -9,13 +9,15 @@ jobs:
     name: Git Creation Demo
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Git Creation Demo
-        uses: bryannice/gitactions-git-issue-creation@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_SHA: ${{ github.sha }}
-          GITHUB_OWNER: 'RobertGlobant20'
-          GITHUB_REPOSITORY: 'issues_action2'
-          GITHUB_ISSUE_TITLE: 'Demo''ing Git Issue Creation'
-          GITHUB_ISSUE_BODY: 'Demo''ing Git Issue Creation'
+      - uses: maxkomarychev/oction-create-issue@v0.7.1
+        id: my_step_id
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          owner: 'RobertGlobant20'
+          repo: 'issues_action2'
+          title: 'Title'
+          body: 'Body content'
+      - name: Print outputs
+        run: |
+          echo ${{ steps.my_step_id.outputs.id }}
+          echo ${{ steps.my_step_id.outputs.number }}
