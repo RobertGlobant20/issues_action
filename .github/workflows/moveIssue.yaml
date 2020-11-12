@@ -1,11 +1,11 @@
-name: Create Issue on other repo V1
-
+name: Move Issue
 on: 
   issues:
-    types: [opened]
+    types: [labeled]
 
 jobs: 
   gitIssueCreation:
+    if: contains(github.event.issue.labels.*.name, 'critical')
     name: Git Creation Demo
     runs-on: ubuntu-latest
     steps:
