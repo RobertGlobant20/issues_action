@@ -6,11 +6,11 @@ on:
 
 jobs: 
   gitIssueCreation:
+    if: github.event.label.name == 'critical'
     name: Git Creation Demo
     runs-on: ubuntu-latest
     steps:
       - name: (Label bug) Move to astul repo
-        if: github.event.label.name == 'bug'
         uses: maxkomarychev/oction-create-issue@v0.7.1
         id: my_step_id
         with:
@@ -19,8 +19,7 @@ jobs:
           repo: 'IssueTest'
           title: github.event.issue.title
           body: github.event.issue.body
-      - name: (Label critical) Move to roberto repo2
-        if: github.event.label.name == 'critical'
+      - name: (Label x) Move to roberto repo2
         uses: maxkomarychev/oction-create-issue@v0.7.1
         id: my_step_id2
         with:
