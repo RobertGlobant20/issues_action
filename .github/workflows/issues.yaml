@@ -41,7 +41,7 @@ jobs:
           enable-versioned-regex: 0
       - name: Auto Close Issue
         run: |
-          output=$(python -c "len(github.event.issue.body)"")
+          output=$(python -c "len(github.event.issue.body)")
         id: text_length_step
       - if: steps.text_length_step.outputs.output > 0
         name: Close Issue
