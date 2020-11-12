@@ -14,7 +14,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN2 }}
           owner: 'RobertGlobant20'
-          repo: 'issues_action2'
+          repo: 'issues_action'
           title: 'Title'
           body: 'Body content'
       - name: Print outputs
