@@ -13,10 +13,10 @@ jobs:
         id: my_step_id
         with:
           token: ${{ secrets.GITHUB_TOKEN2 }}
-          owner: 'RobertGlobant20'
-          repo: 'issues_action'
-          title: 'Title'
-          body: 'Body content'
+          owner: 'Astul-Betizagasti'
+          repo: 'IssueTest'
+          title: 'Issue sent from other repo'
+          body: 'Body content yeh'
       - name: Print outputs
         run: |
           echo ${{ steps.my_step_id.outputs.id }}
