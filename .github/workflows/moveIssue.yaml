@@ -6,7 +6,7 @@ on:
 
 jobs: 
   gitIssueCreation:
-    if: github.event.label.name == 'critical'
+    if: contains(github.event.issue.labels.*.name, 'critical')
     name: Git Creation Demo
     runs-on: ubuntu-latest
     steps:
