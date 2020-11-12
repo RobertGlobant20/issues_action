@@ -13,7 +13,7 @@ jobs:
         uses: maxkomarychev/oction-create-issue@v0.7.1
         id: my_step_id
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN3 }}
           owner: 'Astul-Betizagasti'
           repo: 'IssueTest'
           title: 'Issue sent from other repo'
@@ -22,7 +22,7 @@ jobs:
         uses: maxkomarychev/oction-create-issue@v0.7.1
         id: my_step_id2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN3 }}
           owner: 'Astul-Betizagasti'
           repo: 'IssueTest2'
           title: 'Issue sent from other repo2'
