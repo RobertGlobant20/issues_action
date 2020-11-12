@@ -12,7 +12,7 @@ jobs:
       - uses: maxkomarychev/oction-create-issue@v0.7.1
         id: my_step_id
         with:
-          token: ${{ secrets.GITHUB_TOKEN2 }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           owner: 'RobertGlobant20'
           repo: 'issues_action'
           title: 'Title'
