@@ -5,11 +5,11 @@ on:
 
 jobs: 
   gitIssueCreation:
-    if: contains(github.event.issue.labels.*.name, 'critical')
     name: Git Creation Demo
     runs-on: ubuntu-latest
     steps:
       - name: (Label bug) Move to astul repo
+        if: contains(github.event.issue.labels.*.name, 'bug')
         uses: maxkomarychev/oction-create-issue@v0.7.1
         id: my_step_id
         with:
@@ -18,12 +18,13 @@ jobs:
           repo: 'IssueTest'
           title: github.event.issue.title
           body: github.event.issue.body
-      - name: (Label x) Move to roberto repo2
+      - name: (Label critical) Move to roberto repo2
+        if: contains(github.event.issue.labels.*.name, 'critical')
         uses: maxkomarychev/oction-create-issue@v0.7.1
         id: my_step_id2
         with:
           token: ${{ secrets.GIT_HUB_TOKEN3 }}
           owner: 'RobertGlobant20'
-          repo: 'issue_action2'
+          repo: 'issues_action2'
           title: github.event.issue.title
           body: github.event.issue.body
