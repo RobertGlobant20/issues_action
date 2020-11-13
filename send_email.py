@@ -7,8 +7,8 @@ mail_content = '''Hello,
 This is a simple mail. There is only text, no attachments are there The mail is sent using Python SMTP library.
 Thank You'''
 #The mail addresses and password
-#print(sys.argv[1])
-#print(sys.argv[2])
+print(sys.argv[1])
+print(sys.argv[2])
 sender_address = sys.argv[1]
 sender_pass = sys.argv[2]
 receiver_address = 'roberto.tellez@globant.com'
