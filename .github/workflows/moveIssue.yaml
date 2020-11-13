@@ -37,6 +37,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Close issue
-        if: MOVED
+        if: $MOVED
         uses: peter-evans/close-issue@v1      
 
