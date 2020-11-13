@@ -12,7 +12,7 @@ jobs:
           - label: 'question'
             repoOwner: 'Astul-Betizagasti'
             repoName: 'IssueTest'
-          - label: 'help wanted'
+          - label: 'help-wanted'
             repoOwner: 'RobertGlobant20'
             repoName: 'issues_action2'
     name: Move issues to corresponding repository
