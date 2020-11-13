@@ -45,23 +45,16 @@ jobs:
         with:
           comment: |
             Closed By: Not enought issue information.
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v2
+      - name: Send email
+        uses: AlexisMateo/sendmail-action@5
         with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Github Actions job result
-          #Literal body:
+          smtp-server: smtp.gmail.com
+          smtp-server-port: 587
+          auth-user: ${{ secrets.MAIL_USERNAME }}
+          auth-password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Testing GitHub Actions Email
           body: A new issue has been created!
+          from: aragontiger20@gmail.com
           to: roberto.tellez@globant.com
-          from: aragontiger20@gmail.com # <user@example.com>
-          # Optional content type (defaults to text/plain):
-          content_type: text/html
-      #- name: Label Issues
-       # uses: Naturalclar/issue-action@v2.0.2
-        #with:
-         # title-or-body: "both"
-          #parameters: '[ {"keywords": ["bug", "error"], "labels": ["BUG"]}, {"keywords": ["help", "guidance"], "labels": ["help-wanted"]}]'
-          #github-token: "${{ secrets.GITHUB_TOKEN }}"
+          is-tls: true
+          commit-message: true
