@@ -49,7 +49,7 @@ jobs:
         uses: AlexisMateo/sendmail-action@5
         with:
           smtp-server: smtp.gmail.com
-          smtp-server-port: 587
+          smtp-server-port: 465
           auth-user: ${{ secrets.MAIL_USERNAME }}
           auth-password: ${{ secrets.MAIL_PASSWORD }}
           subject: Testing GitHub Actions Email
