@@ -28,11 +28,8 @@ jobs:
           repo: ${{ matrix.repoName }}
           title: ${{ github.event.issue.title }}
           body: ${{ github.event.issue.body }}
-        run: echo "MOVED=true" >> $GITHUB_ENV        
-  deleteOriginalIssue:
-    name: Close original issue
-    runs-on: ubuntu-latest
-    steps:
+        run: echo "MOVED=true" >> $GITHUB_ENV  
       - name: Close issue
         if: $MOVED
-        uses: peter-evans/close-issue@v1
+        uses: peter-evans/close-issue@v1      
+
