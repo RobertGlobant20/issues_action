@@ -45,15 +45,7 @@ jobs:
         with:
           comment: |
             Closed By: Not enought issue information.
-      - name: Send email
-        uses: AlexisMateo/sendmail-action@5
-        with:
-          smtp-server: smtp.gmail.com
-          smtp-server-port: 465
-          auth-user: ${{ secrets.MAIL_USERNAME }}
-          auth-password: ${{ secrets.MAIL_PASSWORD }}
-          subject: Testing GitHub Actions Email
-          body: A new issue has been created!
-          from: aragontiger20@gmail.com
-          to: mexicasmz13@hotmail.com
-          is-tls: true
+      - name: Send Email
+        run: |
+          python send_email.py ${{ secrets.MAIL_USERNAME }} ${{ secrets.MAIL_PASSWORD }} 
+
