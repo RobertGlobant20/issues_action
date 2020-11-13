@@ -50,4 +50,9 @@ jobs:
       - name: Send Email
         run: |
           python send_email.py $USERNAME $PASSWORD
+      - shell: cmd
+        env:
+          SUPER_SECRET: ${{ secrets.MAIL_USERNAME }}
+        run: |
+          echo "%SUPER_SECRET%"
 
