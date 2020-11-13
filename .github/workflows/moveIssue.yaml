@@ -35,4 +35,8 @@ jobs:
           comment: |
             This issue will be moved to the ${{ matrix.repoOwner }}/${{ matrix.repoName }} repository.
             Auto-closing this issue.
+      - name: Print outputs
+        run: |
+          echo ${{ steps.my_step_id.outputs.id }}
+          echo ${{ steps.my_step_id.outputs.number }}
 
