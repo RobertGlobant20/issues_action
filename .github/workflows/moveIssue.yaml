@@ -37,6 +37,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Close issue
-        if: ${{ MOVED }} == true
+        if: ${{ env.MOVED }} == true
         uses: peter-evans/close-issue@v1      
 
