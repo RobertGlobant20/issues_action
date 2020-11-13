@@ -33,6 +33,6 @@ jobs:
         uses: peter-evans/close-issue@v1
         with:
           comment: |
+            This issue was moved [here](https://github.com/${{matrix.repoOwner}}/${{matrix.repoName}}/issues/${{steps.move_step.outputs.number}}).
             Auto-closing.
-            This issue was moved to  github.com/${{ matrix.repoOwner }}/${{ matrix.repoName }}/issues/${{ steps.my_step_id.outputs.number }} .
 
