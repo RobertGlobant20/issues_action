@@ -7,10 +7,10 @@ jobs:
     strategy:
       matrix: 
         include: 
-          - label: 'critical'
+          - label: 'question'
             repoOwner: 'Astul-Betizagasti'
             repoName: 'IssueTest'
-          - label: 'bug'
+          - label: 'help wanted'
             repoOwner: 'RobertGlobant20'
             repoName: 'issues_action2'
     name: Move issues to corresponding repository
