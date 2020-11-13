@@ -28,15 +28,7 @@ jobs:
           repo: ${{ matrix.repoName }}
           title: ${{ github.event.issue.title }}
           body: ${{ github.event.issue.body }}
-      - name: Issue moved
-        if: contains(github.event.issue.labels.*.name, matrix.label)
-        run: echo "MOVED=true" >> $GITHUB_ENV
-  closeIssue:
-    needs: gitIssueTransfer
-    name: Close moved issues
-    runs-on: ubuntu-latest
-    steps:
       - name: Close issue
-        if: ${{ env.MOVED }} == true
-        uses: peter-evans/close-issue@v1      
+        if: contains(github.event.issue.labels.*.name, matrix.label)
+        uses: peter-evans/close-issue@v1     
 
