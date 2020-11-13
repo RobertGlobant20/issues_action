@@ -2,8 +2,6 @@ name: Move Issue
 on: 
   issues:
     types: [opened, labeled]
-env:
-  MOVED: false
 jobs: 
   gitIssueTransfer:
     strategy:
@@ -28,8 +26,7 @@ jobs:
           repo: ${{ matrix.repoName }}
           title: ${{ github.event.issue.title }}
           body: ${{ github.event.issue.body }}
-        run: echo "MOVED=true" >> $GITHUB_ENV  
       - name: Close issue
-        if: $MOVED
+        if: success()
         uses: peter-evans/close-issue@v1      
 
