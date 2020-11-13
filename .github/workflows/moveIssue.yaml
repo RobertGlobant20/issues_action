@@ -1,30 +1,38 @@
 name: Move Issue
 on: 
   issues:
-    types: [labeled]
-
+    types: [opened, labeled]
+env:
+  MOVED: false
 jobs: 
-  gitIssueCreation:
-    name: Git Creation Demo
+  gitIssueTransfer:
+    strategy:
+      matrix: 
+        include: 
+          - label: 'critical'
+            repoOwner: 'Astul-Betizagasti'
+            repoName: 'IssueTest'
+          - label: 'bug'
+            repoOwner: 'RobertGlobant20'
+            repoName: 'issues_action2'
+    name: Move issues to corresponding repository
     runs-on: ubuntu-latest
     steps:
-      - name: (Label bug) Move to astul repo
-        if: contains(github.event.issue.labels.*.name, 'bug')
+      - name: (Label ${{ matrix.label }}) Move to ${{ matrix.repoName }}
+        if: contains(github.event.issue.labels.*.name, ${{ matrix.label }})
         uses: maxkomarychev/oction-create-issue@v0.7.1
         id: my_step_id
         with:
           token: ${{ secrets.GIT_HUB_TOKEN3 }}
-          owner: 'Astul-Betizagasti'
-          repo: 'IssueTest'
+          owner: ${{ matrix.repoOwner }}
+          repo: ${{ matrix.repoName }}
           title: ${{ github.event.issue.title }}
           body: ${{ github.event.issue.body }}
-      - name: (Label critical) Move to roberto repo2
-        if: contains(github.event.issue.labels.*.name, 'critical')
-        uses: maxkomarychev/oction-create-issue@v0.7.1
-        id: my_step_id2
-        with:
-          token: ${{ secrets.GIT_HUB_TOKEN3 }}
-          owner: 'RobertGlobant20'
-          repo: 'issues_action2'
-          title: ${{ github.event.issue.title }}
-          body: ${{ github.event.issue.body }}
+        run: echo "MOVED=true" >> $GITHUB_ENV        
+  deleteOriginalIssue:
+    name: Close original issue
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close issue
+        if: $MOVED
+        uses: peter-evans/close-issue@v1
