@@ -21,7 +21,7 @@ jobs:
       - name: (Label ${{ matrix.label }}) Move to ${{ matrix.repoName }}
         if: contains(github.event.issue.labels.*.name, matrix.label)
         uses: maxkomarychev/oction-create-issue@v0.7.1
-        id: my_step_id
+        id: move_step
         with:
           token: ${{ secrets.GIT_HUB_TOKEN3 }}
           owner: ${{ matrix.repoOwner }}
@@ -33,10 +33,6 @@ jobs:
         uses: peter-evans/close-issue@v1
         with:
           comment: |
-            This issue will be moved to the ${{ matrix.repoOwner }}/${{ matrix.repoName }} repository.
-            Auto-closing this issue.
-      - name: Print outputs
-        run: |
-          echo ${{ steps.my_step_id.outputs.id }}
-          echo ${{ steps.my_step_id.outputs.number }}
+            Auto-closing.
+            This issue was moved to  github.com/${{ matrix.repoOwner }}/${{ matrix.repoName }}/issues/${{ steps.my_step_id.outputs.number }} .
 
