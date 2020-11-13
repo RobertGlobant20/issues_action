@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       output: ""
+      USERNAME: ${{ secrets.MAIL_USERNAME }}
+      PASSWORD: ${{ secrets.MAIL_PASSWORD }}
     steps: 
       - name: Checkout Repo Content
         uses: actions/checkout@v2 #Check out the repository content
@@ -47,5 +49,5 @@ jobs:
             Closed By: Not enought issue information.
       - name: Send Email
         run: |
-          python send_email.py ${{ secrets.MAIL_USERNAME }} ${{ secrets.MAIL_PASSWORD }} 
+          python send_email.py $USERNAME $PASSWORD
 
