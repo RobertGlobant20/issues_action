@@ -30,5 +30,9 @@ jobs:
           body: ${{ github.event.issue.body }}
       - name: Close issue
         if: contains(github.event.issue.labels.*.name, matrix.label)
-        uses: peter-evans/close-issue@v1     
+        uses: peter-evans/close-issue@v1
+        with:
+          comment: |
+            This issue will be moved to the ${{ matrix.repoOwner }}/${{ matrix.repoName }} repository.
+            Auto-closing this issue.
 
