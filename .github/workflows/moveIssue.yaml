@@ -1,7 +1,7 @@
 name: Move Issue
 on: 
   issues:
-    types: [opened, labeled]
+    types: [labeled]
 env:
   MOVED: false
 jobs: 
