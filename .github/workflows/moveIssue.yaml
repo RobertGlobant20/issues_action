@@ -2,6 +2,8 @@ name: Move Issue
 on: 
   issues:
     types: [opened, labeled]
+env:
+  MOVED: false
 jobs: 
   gitIssueTransfer:
     strategy:
@@ -17,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: (Label ${{ matrix.label }}) Move to ${{ matrix.repoName }}
-        if: contains(github.event.issue.labels.*.name, 'question')
+        if: contains(github.event.issue.labels.*.name, matrix.label)
         uses: maxkomarychev/oction-create-issue@v0.7.1
         id: my_step_id
         with:
@@ -26,7 +28,15 @@ jobs:
           repo: ${{ matrix.repoName }}
           title: ${{ github.event.issue.title }}
           body: ${{ github.event.issue.body }}
+      - name: Issue moved
+        if: contains(github.event.issue.labels.*.name, matrix.label)
+        run: echo "MOVED=true" >> $GITHUB_ENV
+  closeIssue:
+    needs: gitIssueTransfer
+    name: Close moved issues
+    runs-on: ubuntu-latest
+    steps:
       - name: Close issue
-        if: success()
+        if: MOVED
         uses: peter-evans/close-issue@v1      
 
