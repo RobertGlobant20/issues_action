@@ -1,19 +1,39 @@
-Set-Content twitterData.txt -value @"
-Lee, Steve-@Steve_MSFT,2992
-Lee Holmes-13000 @Lee_Holmes
-Staffan Gustafsson-463 @StaffanGson
-Tribbiani, Joey-@Matt_LeBlanc,463400
+$description = @"
+**Describe the bug**
+A clear and concise description of what the bug is.
+
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
+
+**Expected behavior**
+A clear and concise description of what you expected to happen.
+
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
+**Desktop (please complete the following information):**
+ - OS: [e.g. iOS]
+ - Browser [e.g. chrome, safari]
+ - Version [e.g. 22]
+
+**Smartphone (please complete the following information):**
+ - Device: [e.g. iPhone6]
+ - OS: [e.g. iOS8.1]
+ - Browser [e.g. stock browser, safari]
+ - Version [e.g. 22]
+
+**Additional context**
+Add any other context about the problem here.
 "@
 
 # extracting captured groups
-Get-ChildItem twitterData.txt |
-    Select-String -Pattern "^(\w+) ([^-]+)-(\d+) (@\w+)" |
-    Foreach-Object {
-        $first, $last, $followers, $handle = $_.Matches[0].Groups[1..4].Value   # this is a common way of getting the groups of a call to select-string
-        [PSCustomObject] @{
-            FirstName = $first
-            LastName = $last
-            Handle = $handle
-            TwitterFollowers = [int] $followers
-        }
-    }
+#"test1", "test2", "Add test" |
+#    Select-String -Pattern "Add" |
+#	Foreach-Object { $_.Matches } 
+	
+$results = $description | Select-String "\*\*" -AllMatches
+$results.Matches.Count
