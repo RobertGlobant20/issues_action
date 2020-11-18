@@ -2,8 +2,6 @@ name: Move Issue
 on: 
   issues:
     types: [labeled]
-env:
-  MOVED: false
 jobs: 
   gitIssueTransfer:
     strategy:
