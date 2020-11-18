@@ -1,33 +1,27 @@
 $description = @"
-**Describe the bug**
-A clear and concise description of what the bug is.
+If this issue is with Dynamo for Revit, please post your issue on the [Dynamo for Revit Issues page](https://github.com/DynamoDS/DynamoRevit/issues).
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+If this issue is **not** a bug report or improvement request, please check the [Dynamo forum](https://forum.dynamobim.com/), and start a thread there to discuss your issue.
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## Dynamo version
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+(Which version of Dynamo are you using? Go to Help > About if you're not sure.)
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## Operating system
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+(e.g. Windows 7, Windows 8.1, etc)
 
-**Additional context**
-Add any other context about the problem here.
+## What did you do? 
+
+(Fill in here)
+
+## What did you expect to see?
+
+(Fill in here)
+
+## What did you see instead?
+
+(Fill in here)
 "@
 
 # extracting captured groups
@@ -35,5 +29,5 @@ Add any other context about the problem here.
 #    Select-String -Pattern "Add" |
 #	Foreach-Object { $_.Matches } 
 	
-$results = $description | Select-String "\*\*" -AllMatches
+$results = $description | Select-String "\##" -AllMatches
 $results.Matches.Count
