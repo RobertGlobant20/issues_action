@@ -12,8 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Check Information
         shell: pwsh
-        run: echo "::set_output name=output::$(pwsh ls)"
-        #run: echo "::set_output name=output::$(pwsh ..\scripts\CheckIssueContent.ps1 '${{github.event.issue.body}}')"
+        run: echo "::set_output name=output::$(pwsh .\CheckIssueContent.ps1 '${{github.event.issue.body}}')"
       - name: Label Issue
         if: (env.output == true) #REVISAR
         uses: christianvuerings/add-labels@v1
