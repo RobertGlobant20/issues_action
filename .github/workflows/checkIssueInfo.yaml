@@ -12,14 +12,14 @@ jobs:
         uses: frabert/replace-string-action@v1.2
         id: remove_quotations
         with:
-          pattern: '"'
+          pattern: ''''
           string: ${{ github.event.issue.body }}
-          replace-with: ''
+          replace-with: 'anyValue'
       - name: Check Information
         id: check-info
         shell: pwsh
         run:
-          echo "::set_output name=output::$(pwsh .\.github\scripts\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")"
+          echo "::set_output name=output::$(pwsh .\.github\scripts\CheckIssueContent.ps1 '${{ steps.remove_quotations.outputs.replaced }}')"
       - name: Label Issue
         if: (steps.check-info.outputs.output == 'True') #REVISAR
         uses: christianvuerings/add-labels@v1
