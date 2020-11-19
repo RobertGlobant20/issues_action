@@ -21,7 +21,7 @@ jobs:
         run:
           echo "::set_output name=output::$(pwsh .\.github\scripts\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")"
       - name: Label Issue
-        if: (steps.check-info.outputs.output }} == True) #REVISAR
+        if: (steps.check-info.outputs.output == True) #REVISAR
         uses: christianvuerings/add-labels@v1
         with:
           labels: needs more info
