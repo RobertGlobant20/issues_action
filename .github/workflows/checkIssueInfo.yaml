@@ -19,7 +19,7 @@ jobs:
         id: check-info
         shell: pwsh
         run:
-          echo "::set_output name=output::$(pwsh .\.github\scripts\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")"
+          echo '::set_output name=output::$(pwsh .\.github\scripts\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")'
       - name: Label Issue
         run: ${{steps.check-info.outputs.output}}
       #  if: steps.id.outputs.key == 'True' #REVISAR
