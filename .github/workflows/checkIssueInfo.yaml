@@ -1,0 +1,29 @@
+name: Check for missing information
+on: 
+  issues:
+    types: [opened]
+jobs: 
+  checkIssueInformation:
+    name: Check for missing information
+    runs-on: ubuntu-latest
+    env:
+      output: "false"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check Information
+        shell: pwsh
+        run: echo "::set_output name=output::$(..\scripts\CheckIssueContent.ps1 ${{github.event.issue.body}})"
+      - name: Label Issue
+        if: (env.output == true) #REVISAR
+        uses: christianvuerings/add-labels@v1
+        with:
+          labels: needs more info
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Ask for more information
+        if: (env.output == true) #REVISAR
+        uses: ben-z/actions-comment-on-issue@1.0.2
+        with:
+          message: "This issue is missing information. Please, make sure to fill in all the necessary fields."
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
