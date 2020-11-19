@@ -20,10 +20,10 @@ jobs:
           labels: needs more info
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Ask for more information
-        if: (env.output == true) #REVISAR
-        uses: ben-z/actions-comment-on-issue@1.0.2
-        with:
-          message: "This issue is missing information. Please, make sure to fill in all the necessary fields."
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  - name: Ask for more information
+    #    if: (env.output == true) #REVISAR
+    #    uses: ben-z/actions-comment-on-issue@1.0.2
+    #    with:
+    #      message: "This issue is missing information. Please, make sure to fill in all the necessary fields."
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
