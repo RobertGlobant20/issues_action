@@ -17,10 +17,7 @@ jobs:
           replace-with: 'anyValue'
       - name: Check Information
         id: check-info
-        shell: pwsh
-        run: |
-          $response = $(pwsh .\.github\scripts\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")
-          echo "::set_output name=output::$($response)"
+        run: echo "::set_output name=output::$(pwsh .\.github\scripts\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")"
       - name: Label ${{steps.check-info.outputs.output}} ISSUE
         run: ${{steps.check-info.outputs.output}}
       #  if: steps.id.outputs.key == 'True' #REVISAR
