@@ -20,7 +20,7 @@ jobs:
       - name: Check Information
         id: check-info
         shell: pwsh
-        run:
+        run: |
           echo "output=$(pwsh .\.github\scripts\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")" >> $GITHUB_ENV
           echo "::set_output name=output::$(pwsh .\.github\scripts\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")"
       - name: Label Issue
