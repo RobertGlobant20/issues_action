@@ -21,7 +21,7 @@ jobs:
         id: check-info
         run: echo "issue_incomplete=$(pwsh .\\.github\\scripts\\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")" >> $GITHUB_ENV
       - name: Label Issue
-        if: ${{env.issue_incomplete == True}}
+        if: ${{env.issue_incomplete}}
         uses: christianvuerings/add-labels@v1
         with:
           labels: needs more info
