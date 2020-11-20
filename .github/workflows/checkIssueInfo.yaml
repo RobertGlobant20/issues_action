@@ -7,7 +7,7 @@ jobs:
     name: Check for missing information
     runs-on: ubuntu-latest
     env:
-      action_state: Mona
+      issue_incomplete: False
     steps:
       - uses: actions/checkout@v2
       - name: Remove conflicting chars
@@ -19,18 +19,14 @@ jobs:
           replace-with: 'anyValue'
       - name: Check Information
         id: check-info
-        run: echo "action_state=$(pwsh .\\.github\\scripts\\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")" >> $GITHUB_ENV
-        #echo '::set_output name=outputName::ABC'
-        #echo "::set_output name=output::$(pwsh .\\.github\\scripts\\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")"
-      - if: ${{ success() }}
-        name: Label ${{env.action_state}} ISSUE
-        run: ${{env.action_state}}
-      #  if: steps.id.outputs.key == 'True' #REVISAR
-      #  uses: christianvuerings/add-labels@v1
-      #  with:
-      #    labels: needs more info
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "issue_incomplete=$(pwsh .\\.github\\scripts\\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")" >> $GITHUB_ENV
+      - name: Label Issue
+        if: ${{env.issue_incomplete == True}}
+        uses: christianvuerings/add-labels@v1
+        with:
+          labels: needs more info
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #  - name: Ask for more information
     #    if: (env.output == true) #REVISAR
     #    uses: ben-z/actions-comment-on-issue@1.0.2
