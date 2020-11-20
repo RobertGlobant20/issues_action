@@ -2,8 +2,6 @@ name: Check for missing information
 on: 
   issues:
     types: [opened]
-env:
-  output: "unchanged"
 jobs: 
   checkIssueInformation:
     name: Check for missing information
@@ -20,13 +18,9 @@ jobs:
       - name: Check Information
         id: check-info
         shell: pwsh
-        run: |
-          echo "output=$(pwsh .\.github\scripts\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")" >> $GITHUB_ENV
-          echo "::set_output name=output::$(pwsh .\.github\scripts\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")"
-      - name: Label Issue
-        run: |
-          ${{steps.check-info.outputs.output}}
-          ${{env.output}}
+        run: echo "::set_output name=output::$(pwsh .\.github\scripts\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")"
+      - name: Labe ${{steps.check-info.outputs.output}} ISSUE
+        run: ${{steps.check-info.outputs.output}}
       #  if: steps.id.outputs.key == 'True' #REVISAR
       #  uses: christianvuerings/add-labels@v1
       #  with:
