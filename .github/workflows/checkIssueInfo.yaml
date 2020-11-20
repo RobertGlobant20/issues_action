@@ -19,7 +19,8 @@ jobs:
         id: check-info
         run: echo "::set_output name=outputName::ABC"
         #echo "::set_output name=output::$(pwsh .\\.github\\scripts\\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")"
-      - name: Label ${{steps.check-info.outputs.outputName}} ISSUE
+      - if: ${{ success() }}
+        name: Label ${{steps.check-info.outputs.outputName}} ISSUE
         run: ${{steps.check-info.outputs.outputName}}
       #  if: steps.id.outputs.key == 'True' #REVISAR
       #  uses: christianvuerings/add-labels@v1
