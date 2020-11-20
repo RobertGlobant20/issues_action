@@ -23,7 +23,7 @@ jobs:
       - name: Label Issue
         if: ${{env.issue_incomplete == 'True'}}
         run: |
-          curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -H "Accept: application/vnd.github.antiope-preview+json" -d '{"labels": ["needs more info"]}' ${{ github.event.issue.url }}/labels
+          curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["needs more info"]}' ${{ github.event.issue.url }}/labels
         #uses: christianvuerings/add-labels@v1
         #with:
         #  labels: needs more info
