@@ -27,16 +27,3 @@ jobs:
         run: |
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["${{env.issue_label}}"]}' ${{ github.event.issue.url }}/labels
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"body": "${{env.issue_comment}}"}' ${{ github.event.issue.url }}/comments
-        #uses: christianvuerings/add-labels@v1
-        #with:
-        #  labels: needs more info
-        #env:
-        #  issue_number: ${{ github.event.issue.number }}
-        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #  - name: Ask for more information
-    #    if: (env.output == true) #REVISAR
-    #    uses: ben-z/actions-comment-on-issue@1.0.2
-    #    with:
-    #      message: "This issue is missing information. Please, make sure to fill in all the necessary fields."
-    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
