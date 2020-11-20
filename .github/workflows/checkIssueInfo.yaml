@@ -7,7 +7,7 @@ jobs:
     name: Check for missing information
     runs-on: ubuntu-latest
     env:
-      issue_incomplete: False
+      issue_incomplete: 'False'
     steps:
       - uses: actions/checkout@v2
       - name: Remove conflicting chars
@@ -21,10 +21,11 @@ jobs:
         id: check-info
         run: echo "issue_incomplete=$(pwsh .\\.github\\scripts\\CheckIssueContent.ps1 "${{ steps.remove_quotations.outputs.replaced }}")" >> $GITHUB_ENV
       - name: Label Issue
-        if: ${{env.issue_incomplete}}
+        if: ${{env.issue_incomplete == 'True'}}
         uses: christianvuerings/add-labels@v1
         with:
           labels: needs more info
+          issue_number: ${{ github.event.issue.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #  - name: Ask for more information
