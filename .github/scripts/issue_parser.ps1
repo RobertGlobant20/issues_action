@@ -1,11 +1,8 @@
 
 #This method parse the issue template located in github and returns a JSON structure with all the information (Title/Description)
-function Get_Issue_Template
+#Receives as a parameter the template defined in the github repo or the template filled with the issue information
+function Get_Parsed_Issue ($InputTemplateString)
 {
-	#Receives as a parameter the template defined in the github repo or the template filled with the issue information
-	param (
-        $InputTemplateString
-	)
 	[System.Collections.ArrayList]$TemplateArray = @()
 
 	#All the titles/questions in the github template should start with the characters ##, then this regex will get title

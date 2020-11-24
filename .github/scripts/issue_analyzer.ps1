@@ -13,13 +13,13 @@ $InputString = $Response.body
 $TextIssueFilled = $InputString
 $TextIssueTemplate = Get-Content -Raw -Path ".\.github\ISSUE_TEMPLATE.MD"
 
-$ArrayIssueTemplate = Get_Issue_Template $TextIssueTemplate
-$ArrayIssueFilled = Get_Issue_Template $TextIssueFilled
+$ArrayIssueTemplate = Get_Parsed_Issue $TextIssueTemplate
+$ArrayIssueFilled = Get_Parsed_Issue $TextIssueFilled
 
 #$ArrayIssueTemplate
 #$ArrayIssueFilled 
 #Parameters: Template, String
-$ArrayComparisonResult = Compare_Issue_Template $ArrayIssueTemplate, $ArrayIssueFilled
+$ArrayComparisonResult = Compare_Issue_Template $ArrayIssueTemplate $ArrayIssueFilled
 
 #$ArrayComparisonResult
-$ArrayComparisonResult
+ConvertTo-Json $ArrayComparisonResult

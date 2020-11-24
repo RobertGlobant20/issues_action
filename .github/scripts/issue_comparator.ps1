@@ -6,7 +6,6 @@ function Compare_Issue_Template($InputTemplateArray, $InputIssueFilledArray)
 	{
 		$TitleCompareStatus = ""
 		$ContentCompareStatus = ""
-		$IssueTitle = $InputIssueFilledArray.Count
 		ForEach ($IssueSection in $InputIssueFilledArray)
 		{
 			If ($IssueSection.Title -match $TemplateSection.Title)
@@ -38,9 +37,8 @@ function Compare_Issue_Template($InputTemplateArray, $InputIssueFilledArray)
 				#The issue content is different than the template then it was filled by the user
 				$ContentCompareStatus = "Filled"
 			}
-			$IssueTitle = $IssueSection.Title
 		}
-		$ResultEntry = @{Title=$TemplateSection.Title; Title2=$IssueTitle; Content=$TemplateSection.Content; TitleStatus=$TitleCompareStatus; ContentStatus=$ContentCompareStatus}
+		$ResultEntry = @{Title=$TemplateSection.Title; Content=$TemplateSection.Content; TitleStatus=$TitleCompareStatus; ContentStatus=$ContentCompareStatus}
 		$ResultArrayComparison.Add($ResultEntry)
 	}
 
