@@ -21,4 +21,5 @@ $ArrayIssueFilled = Get_Issue_Template $TextIssueFilled
 #Parameters: Template, String
 $ArrayComparisonResult = Compare_Issue_Template $ArrayIssueTemplate, $ArrayIssueFilled
 
+#$ArrayComparisonResult
 $ArrayComparisonResult
