@@ -1,46 +1,61 @@
 function Compare_Issue_Template($InputTemplateArray, $InputIssueFilledArray)
 {
-	[System.Collections.ArrayList]$ResultArrayComparison = @()
+	$AllIssuesArray = @()
 
-	ForEach ($TemplateSection in $InputTemplateArray)
-	{
-		$TitleCompareStatus = ""
-		$ContentCompareStatus = ""
-		ForEach ($IssueSection in $InputIssueFilledArray)
-		{
-			If ($IssueSection.Title -match $TemplateSection.Title)
+	$TitleStatus = ""
+	$ContentStatus = ""
+	
+	$InputTemplateArray | ForEach-Object { 
+		
+		#Write-Output $_.Title
+		$TemplateEntry = $PSItem
+		$IssueContent = ""
+		ForEach($entry in $InputIssueFilledArray ) { 
+			$IssueEntry = $entry
+			$EntryTitle = $IssueEntry.Title.Trim()
+			$TemplateTitle = $TemplateEntry.Title.Trim()
+			$TemplateContent = $TemplateEntry.Content.Trim()
+			$IssueContent = $IssueEntry.Content
+			If ($EntryTitle -Contains $TemplateTitle)
 			{								
-				if ($IssueSection.Title -eq $TemplateSection.Title)
+				if ($EntryTitle -eq $TemplateTitle)
 				{
 					#Means that the title is the same than in the template
-					$TitleCompareStatus = "Equal"
+					$TitleStatus = "Equal"
+					If ($IssueContent -eq $TemplateContent)
+					{
+						#The template content is the same than the issue content then is empty
+						$ContentStatus = "Empty"
+					}
+					else
+					{
+						#The issue content is different than the template then it was filled by the user
+						$ContentStatus = "Filled"
+					}	
+					$IssueContent = $IssueContent				
+					break
 				}
 				else 
 				{
 					#The title doesn't match the template then was updated (even when the case was changed)
-					$TitleCompareStatus = "Updated"
+					$TitleStatus = "Updated"
 				}	
 			}
 			else
 			{
 				#The title was not found the was deleted by the issue creator
-				$TitleCompareStatus = "NotFound"
-			}
-
-			If ($IssueSection.Content -eq $TemplateSection.Content)
-			{
-				#The template content is the same than the issue content then is empty
-				$ContentCompareStatus = "Empty"
-			}
-			else
-			{
-				#The issue content is different than the template then it was filled by the user
-				$ContentCompareStatus = "Filled"
-			}
+				$TitleStatus = "NotFound"
+				$ContentStatus = "NotFound"
+			}		
 		}
-		$ResultEntry = @{Title=$TemplateSection.Title; Content=$TemplateSection.Content; TitleStatus=$TitleCompareStatus; ContentStatus=$ContentCompareStatus}
-		$ResultArrayComparison.Add($ResultEntry)
+
+		$AllIssuesArray += (@{ 
+			Title=$TemplateEntry.Title;
+			Content=$IssueContent;
+			TitleStatus=$TitleStatus;
+			ContentStatus=$ContentStatus;
+		})
 	}
 
-	return $ResultArrayComparison
+	Write-Output $AllIssuesArray -NoEnumerate
 }
