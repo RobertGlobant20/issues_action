@@ -35,6 +35,7 @@ jobs:
           echo "${{ steps.remove_quotations.outputs.replaced }}"
           echo "${{ env.acceptable_missing_info }}"
           echo "analysis_response=$(pwsh .\\.github\\scripts\\Issue_Analyzer_astul.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
+          echo "${{ env.analysis_response }}"
       - name: Label and comment issue
         if: env.analysis_response == 'Valid'
         run: |
