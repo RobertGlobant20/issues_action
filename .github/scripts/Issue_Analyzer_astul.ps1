@@ -7,8 +7,8 @@
 param([string]$issueTemplateFile, [string]$issueContent, [int]$acceptableEmptyFields=1)
 
 #Loads the requiered functions
-. .\issue_comparator.ps1
-. .\issue_parser.ps1
+. .\.github\scripts\issue_comparator.ps1
+. .\.github\scripts\issue_parser.ps1
 
 #--Processing--
 $issueTemplate = Get-Content -Raw -Path ..\$issueTemplateFile
