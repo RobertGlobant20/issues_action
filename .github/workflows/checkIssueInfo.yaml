@@ -11,9 +11,14 @@ jobs:
       #and then checked on step two to know if adding the label and comment is necessary.
       #The initial 'undefined' value will be overridden when the script runs.
       analysis_response: undefined
-      issue_label: needs more info
       #issue_coment holds the comment format, while the missing information will be provided by analysis_response
       issue_comment: "This issue is missing information. Please, make sure to fill in all the necessary fields:"
+      #template file name
+      template: "ISSUE_TEMPLATE.MD"
+      #label to tag the issue with if its missing information
+      issue_label: needs more info
+      #ammount of sections from the template that can be missing information for the issue to still be considered complete
+      acceptable_missing_info: 1
     steps:
       - uses: actions/checkout@v2
       - name: Remove conflicting chars
@@ -25,7 +30,7 @@ jobs:
           replace-with: '-'
       - name: Check Information
         id: check-info
-        run: echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ steps.remove_quotations.outputs.replaced }}")" >> $GITHUB_ENV
+        run: echo "analysis_response=$(pwsh .\\.github\\scripts\\Issue_Analyzer_astul.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
       - name: Label and comment issue
         if: env.analysis_response != 'Valid'
         run: |

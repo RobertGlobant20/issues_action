@@ -15,16 +15,14 @@ $issueTemplate = Get-Content -Raw -Path ..\$issueTemplateFile
 
 #Parse the template and issue
 $parsed_issue_content = Get_Parsed_Issue $issueContent
-#$parsed_issue_content
 $parsed_issue_template = Get_Parsed_Issue $issueTemplate
-#$parsed_issue_template
 
 #Compares the tempalte and issue
 $comparation_result = Compare_Issue_Template $parsed_issue_template $parsed_issue_content
-$comparation_result
 
 $analysis_result = " "
 [int]$missingFields = 0
+
 #Checks for missing content on the comparator result and loads
 #$analysis_result with the corresponding section title
 foreach ($Section in $comparation_result)
@@ -39,4 +37,6 @@ foreach ($Section in $comparation_result)
 if(($analysis_result -eq " ") -or ($missingFields -lt $acceptableEmptyFields)) {$analysis_result = "Valid"}
 
 #--Output--
+#"Valid" if the issue has the necessary information
+# or string with section titles if information is missing
 $analysis_result
