@@ -37,8 +37,4 @@ jobs:
         run: |
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["${{env.issue_label}}"]}' ${{ github.event.issue.url }}/labels
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"body": "${{env.issue_comment}}${{env.analysis_response}}."}' ${{ github.event.issue.url }}/comments
-      - name: Get Issue Info
-        run: | 
-          echo "Body is ${{ github.event.issue.body }}"
-          pwd
-          ls -la
+          
