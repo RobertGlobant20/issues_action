@@ -1,6 +1,19 @@
+<#
+.SYNOPSIS
+Compare two arrays with template/issue information
+
+.DESCRIPTION
+ This method will receive two parameters of type Array[Hashtable], the first one contains the template information (ISSUE_TEMPLATE.MD) the second one contains information about the issue filled in github/issues section.
+
+.PARAMETER InputTemplateArray
+Array[Hashtable] containing the template information (ISSUE_TEMPLATE.MD)
+
+.PARAMETER InputIssueFilledArray
+Array[Hashtable] containing the issue information filled by the user in github/issues section
+#>
 function Compare_Issue_Template($InputTemplateArray, $InputIssueFilledArray)
 {
-	$AllIssuesArray = @()
+	$ComparisonArrayResult = @()
 
 	$TitleStatus = ""
 	$ContentStatus = ""
@@ -17,14 +30,14 @@ function Compare_Issue_Template($InputTemplateArray, $InputIssueFilledArray)
 			$TemplateContent = $TemplateEntry.Content.Trim()
 			$IssueContent = $IssueEntry.Content
 			If ($EntryTitle -Contains $TemplateTitle)
-			{								
+			{						
+				#Means that the title is the same than in the template, so it should be empty		
 				if ($EntryTitle -eq $TemplateTitle)
 				{
-					#Means that the title is the same than in the template
 					$TitleStatus = "Equal"
 					If (($IssueContent -eq $TemplateContent) -or ([string]::IsNullOrEmpty($IssueContent)))
 					{
-						#The template content is the same than the issue content then is empty
+						#The template content is the same than the issue content or the content is empty
 						$ContentStatus = "Empty"
 					}
 					else
@@ -49,7 +62,8 @@ function Compare_Issue_Template($InputTemplateArray, $InputIssueFilledArray)
 			}		
 		}
 
-		$AllIssuesArray += (@{ 
+		#Add the resulting values to the array
+		$ComparisonArrayResult += (@{ 
 			Title=$TemplateEntry.Title;
 			Content=$IssueContent;
 			TitleStatus=$TitleStatus;
@@ -57,5 +71,5 @@ function Compare_Issue_Template($InputTemplateArray, $InputIssueFilledArray)
 		})
 	}
 
-	Write-Output $AllIssuesArray -NoEnumerate
+	Write-Output $ComparisonArrayResult -NoEnumerate
 }
