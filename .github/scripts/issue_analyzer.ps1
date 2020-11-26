@@ -34,7 +34,7 @@ foreach ($Section in $comparation_result)
 }
 
 #If no missing information was found then the issue is Valid
-if(($analysis_result -eq " ") -or ($missingFields -lt $acceptableEmptyFields)) {$analysis_result = "Valid"}
+if(($analysis_result -eq " ") -or ($missingFields -le $acceptableEmptyFields)) {$analysis_result = "Valid"}
 
 #--Output--
 #"Valid" if the issue has the necessary information
