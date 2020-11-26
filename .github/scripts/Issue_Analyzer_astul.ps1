@@ -11,7 +11,7 @@ param([string]$issueTemplateFile, [string]$issueContent, [int]$acceptableEmptyFi
 . .\.github\scripts\issue_parser.ps1
 
 #--Processing--
-$issueTemplate = Get-Content -Raw -Path ..\$issueTemplateFile
+$issueTemplate = Get-Content -Raw -Path .github\$issueTemplateFile
 
 #Parse the template and issue
 $parsed_issue_content = Get_Parsed_Issue $issueContent
