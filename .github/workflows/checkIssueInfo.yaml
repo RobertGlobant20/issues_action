@@ -30,7 +30,11 @@ jobs:
           replace-with: '-'
       - name: Check Information
         id: check-info
-        run: echo "analysis_response=$(pwsh .\\.github\\scripts\\Issue_Analyzer_astul.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
+        run: |
+          echo "${{ env.template }}"
+          echo "${{ steps.remove_quotations.outputs.replaced }}"
+          echo "${{ env.acceptable_missing_info }}"
+          echo "analysis_response=$(pwsh .\\.github\\scripts\\Issue_Analyzer_astul.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
       - name: Label and comment issue
         if: env.analysis_response == 'Valid'
         run: |
