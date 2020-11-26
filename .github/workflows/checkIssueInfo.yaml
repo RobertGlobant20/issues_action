@@ -14,7 +14,7 @@ jobs:
       #issue_coment holds the comment format, while the missing information will be provided by analysis_response
       issue_comment: "This issue is missing information. Please, make sure to fill in all the necessary fields:"
       #template file name
-      template: "ISSUE_TEMPLATE.MD"
+      template: "ISSUE_TEMPLATE.md"
       #label to tag the issue with if its missing information
       issue_label: needs more info
       #amount of sections from the template that can be missing information for the issue to still be considered complete
