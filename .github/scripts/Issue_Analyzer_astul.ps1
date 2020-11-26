@@ -28,7 +28,7 @@ $analysis_result = " "
 foreach ($Section in $comparation_result)
 {
     if(($Section.ContentStatus -eq "Empty") -or ($Section.ContentStatus -eq "NotFound")){
-        $script:analysis_result = "$($script:analysis_result) `n- $($Section.Title)"
+        $script:analysis_result = "$($script:analysis_result) \n- $($Section.Title)"
         $script:missingFields = $script:missingFields + 1
     }
 }
