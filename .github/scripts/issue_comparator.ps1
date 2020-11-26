@@ -22,7 +22,7 @@ function Compare_Issue_Template($InputTemplateArray, $InputIssueFilledArray)
 				{
 					#Means that the title is the same than in the template
 					$TitleStatus = "Equal"
-					If ($IssueContent -eq $TemplateContent)
+					If (($IssueContent -eq $TemplateContent) -or ([string]::IsNullOrEmpty($IssueContent)))
 					{
 						#The template content is the same than the issue content then is empty
 						$ContentStatus = "Empty"

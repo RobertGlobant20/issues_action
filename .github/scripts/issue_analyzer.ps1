@@ -7,7 +7,20 @@ $Response = Invoke-WebRequest -URI $Request |
 			ConvertFrom-Json | 
 			Select-Object number, title, body
 
-$InputString = $Response.body
+#$InputString = $Response.body
+$InputString = "## Dynamo version
+(Which version of Dynamo are you using? Go to Help > About if you're not sure.)
+
+## Operating system
+(e.g. Windows 7, Windows 8.1, etc)
+
+## What did you do? 
+(Fill in here)
+## What did you expect to see?
+
+## What did you see instead?
+
+"
 
 $TextIssueFilled = $InputString
 $TextIssueTemplate = Get-Content -Raw -Path ".\.github\ISSUE_TEMPLATE.MD"
