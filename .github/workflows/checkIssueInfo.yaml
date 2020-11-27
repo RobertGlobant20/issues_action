@@ -40,4 +40,5 @@ jobs:
       - name: Unlabel updated issue
         if: env.analysis_response == 'Valid'
         run: |
-          curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -X DELETE ${{ github.event.issue.url }}/labels/"${{env.issue_label}}"
+          echo urldecode ${{env.issue_label}}
+          curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -X DELETE ${{ github.event.issue.url }}/labels/ --data-urlencode "${{env.issue_label}}"
