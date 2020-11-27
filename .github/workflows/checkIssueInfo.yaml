@@ -16,7 +16,7 @@ jobs:
       #template file name
       template: "ISSUE_TEMPLATE.md"
       #label to tag the issue with if its missing information
-      issue_label: needs more info
+      issue_label: NeedsMoreInfo
       #amount of sections from the template that can be missing information for the issue to still be considered complete
       acceptable_missing_info: 1
     steps:
@@ -41,4 +41,4 @@ jobs:
         if: env.analysis_response == 'Valid'
         run: |
           echo urldecode ${{env.issue_label}}
-          curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -X DELETE ${{ github.event.issue.url }}/labels/ --data-urlencode "${{env.issue_label}}"
+          curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -X DELETE ${{ github.event.issue.url }}/labels/${{env.issue_label}}
