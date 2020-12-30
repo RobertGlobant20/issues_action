@@ -50,7 +50,7 @@ jobs:
       - name: Clean Issue Body
         id: clean-issue-body
         run: |
-          echo "parsed_issue_body=$(pwsh  .\\.github\\scripts\\issue_body_cleaner.ps1 "${{ github.event.issue.body }}" )" >> $GITHUB_ENV
+          echo "parsed_issue_body=$(pwsh  .\\.github\\scripts\\issue_body_cleaner.ps1 "${{ github.event.issue.body }}" )"
       - name: checkout IssuesTypePredicter
         uses: actions/checkout@v2
         with:
