@@ -55,4 +55,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: RobertGlobant20/IssuesTypePredicter
+      - name: Run Issues Type Predicter
+        run: | 
+          cd "IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/bin/Release/netcoreapp3.1/"
+          ./IssuesTypePredicterML.exe
     
