@@ -29,9 +29,13 @@ $TextIssueTemplate = Get-Content -Raw -Path ".\.github\ISSUE_TEMPLATE.MD"
 $ArrayIssueTemplate = Get_Parsed_Issue $TextIssueTemplate
 $ArrayIssueFilled = Get_Parsed_Issue $TextIssueFilled
 
+$ArrayIssueFilled | ForEach-Object { 
+	Write-Output $_['Content']
+}
+
 $ArrayComparisonResult = Compare_Issue_Template $ArrayIssueTemplate $ArrayIssueFilled
 
-$ArrayComparisonResult | ForEach-Object { 
-	$_
-	Write-Output "`n"
-}
+#$ArrayComparisonResult | ForEach-Object { 
+#	$_
+#Write-Output "`n"
+#}

@@ -21,7 +21,7 @@ Any result
 ## What did you see instead?
 Nothing else
 #>
-function Get_Parsed_Issue ($InputTemplateString)
+function Get_Parsed_Issue ($InputTemplateString, $TitlesFilters = @())
 {
 	[System.Collections.ArrayList]$ParsedTextArray = @()
 
@@ -43,8 +43,17 @@ function Get_Parsed_Issue ($InputTemplateString)
 		#Remove the characters \n \r from the Content
 		$ContentValue = $InputTemplateString.Substring($StartIndex, $EndIndex - $StartIndex) -replace "`n","" -replace "`r",""
 
-		#Add returns an index when we need to catch it in a variable otherwise will be returned
-		$null = $ParsedTextArray.Add(@{Title=$TitleValue; Content=$ContentValue})
+		if ($TitlesFilters.Count -gt 0)
+		{
+			#Add returns an index when we need to catch it in a variable otherwise will be returned
+			if (-Not $TitlesFilters.Contains($TitleValue.ToLower().Trim())){
+				$null = $ParsedTextArray.Add(@{Title=$TitleValue; Content=$ContentValue})
+			}
+		}
+		else {
+			$null = $ParsedTextArray.Add(@{Title=$TitleValue; Content=$ContentValue})
+		}
+		
 	}
 	Write-Output $ParsedTextArray -NoEnumerate
 }
