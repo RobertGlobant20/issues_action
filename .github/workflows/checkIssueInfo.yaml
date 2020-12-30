@@ -58,5 +58,6 @@ jobs:
       - name: Run Issues Type Predicter
         run: | 
           cd "./IssuesTypePredicterML.ConsoleApp/bin/Release/netcoreapp3.1/"
+          chmod +x ./IssuesTypePredicterML.exe
           ./IssuesTypePredicterML.exe
     
