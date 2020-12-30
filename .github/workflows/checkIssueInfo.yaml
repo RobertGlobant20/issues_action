@@ -43,10 +43,6 @@ jobs:
         run: |
           echo urldecode ${{env.issue_label}}
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -X DELETE ${{ github.event.issue.url }}/labels/$(echo -ne "${{env.issue_label}}" | xxd -plain | tr -d '\n' | sed 's/\(..\)/%\1/g')
-      - name: Get Local Machine Information
-        run: |
-          pwd
-          ls -R
       - name: Clean Issue Body
         id: clean-issue-body
         run: |
@@ -55,6 +51,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: RobertGlobant20/IssuesTypePredicter
+      - name: Get Local Machine Information
+        run: |
+          pwd
+          ls -R
       - name: Run Issues Type Predicter
         run: | 
           cd "IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/bin/Release/netcoreapp3.1/"
