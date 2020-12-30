@@ -31,6 +31,7 @@ jobs:
       - name: Check Information
         id: check-info
         run: |
+          ls -la
           echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
       - name: Label and comment issue
         if: env.analysis_response != 'Valid'
@@ -49,7 +50,7 @@ jobs:
       - name: Get Local Machine Information
         run: |
           pwd
-          ls -la ../
+          ls -la
       - name: Clean Issue Body
         id: clean-issue-body
         run: |
