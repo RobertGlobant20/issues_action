@@ -55,6 +55,14 @@ jobs:
         run: |
           pwd
           ls -R
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1   
+      # restore dependencies  
+      - name: Install dependencies
+        run: dotnet restore
       - name: Run Issues Type Predicter
         run: | 
           cd "./IssuesTypePredicterML.ConsoleApp/bin/Release/netcoreapp3.1/"
