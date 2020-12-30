@@ -57,6 +57,6 @@ jobs:
           ls -R
       - name: Run Issues Type Predicter
         run: | 
-          cd "IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/bin/Release/netcoreapp3.1/"
+          cd "./IssuesTypePredicterML.ConsoleApp/bin/Release/netcoreapp3.1/"
           ./IssuesTypePredicterML.exe
     
