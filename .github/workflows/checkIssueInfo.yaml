@@ -49,7 +49,7 @@ jobs:
       - name: Get Local Machine Information
         run: |
           pwd
-          ls -R
+          ls -la
       - name: Clean Issue Body
         id: clean-issue-body
         run: |
