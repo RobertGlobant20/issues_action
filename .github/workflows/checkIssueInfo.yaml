@@ -68,5 +68,5 @@ jobs:
           dotnet restore
           dotnet build
           cd "../IssuesTypePredicterML.ConsoleApp/bin/Release/netcoreapp3.1"
-          dotnet run -r IssuesTypePredicterML.exe ${issue_json}
+          dotnet IssuesTypePredicterML.exe ${issue_json}
     
