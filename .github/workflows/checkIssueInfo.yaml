@@ -68,5 +68,5 @@ jobs:
           dotnet restore
           dotnet build
           cd "../IssuesTypePredicterML.ConsoleApp/"
-          dotnet ${issue_json}
+          dotnet run ${issue_json}
     
