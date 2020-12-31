@@ -65,6 +65,7 @@ jobs:
         run: |
           pwd
           ls -lR IssuesTypePredicter
+          echo ${{env.issue_json_string}}
       - name: Run Issues Type Predicter
         env:
           issue_json: "{\\\"Number\\\":23,\\\"Title\\\":\\\"Testingtitle\\\",\\\"Description\\\":\\\"TestingDescription\\\"}"
