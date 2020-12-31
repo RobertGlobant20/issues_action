@@ -58,7 +58,7 @@ jobs:
       - name: Get Local Machine Information
         run: |
           pwd
-          ls -la
+          ls -lR IssuesTypePredicter
       - name: Run Issues Type Predicter
         env:
           issue_json: "{\"Number\":23,\"Title\":\"Testingtitle\",\"Description\":\"TestingDescription\"}"
