@@ -1,8 +1,8 @@
 param([int]$issueNumber, [string]$issueTitle, [string]$issueDescription)
 
-$issueNumber = 12
-$issueTitle = "Title"
-$issueDescription = "Description"
+#$issueNumber = 12
+#$issueTitle = "Title"
+#$issueDescription = "Description"
 
 $json_object = @{ 
 				Number = $issueNumber 
