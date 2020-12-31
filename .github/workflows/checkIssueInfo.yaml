@@ -64,5 +64,5 @@ jobs:
         run: | 
           cd "./IssuesTypePredicterML.ConsoleApp/bin/Release/netcoreapp3.1/"
           chmod +x ./IssuesTypePredicterML.exe
-          ./IssuesTypePredicterML.exe
+          dotnet ./IssuesTypePredicterML.exe
     
