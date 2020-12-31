@@ -48,7 +48,7 @@ jobs:
       - name: Clean Issue Body
         id: clean-issue-body
         run: |
-          echo "parsed_issue_body=$(pwsh  .\\.github\\scripts\\issue_body_cleaner.ps1 "${{ github.event.issue.body }}" )" >> $GITHUB_ENV
+          echo "parsed_issue_body=$(pwsh  .\\.github\\scripts\\issue_body_cleaner.ps1 "${{ steps.remove_quotations.outputs.replaced }}" )" >> $GITHUB_ENV
       - name: Create IssuesTypePredicter folder
         run: |
           mkdir IssuesTypePredicter
