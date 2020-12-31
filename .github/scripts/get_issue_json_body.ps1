@@ -8,4 +8,6 @@ $json_object = @{
 
 $json_string = ConvertTo-Json $json_object
 
+$json_string.Replace('\"','\\\"')
+
 Write-Output $json_string
