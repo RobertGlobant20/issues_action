@@ -77,5 +77,5 @@ jobs:
           issue_json: "{\"Number\":23,\"Title\":\"Testingtitle\",\"Description\":\"TestingDescription\"}"
         run: | 
           cd "./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/"
-          dotnet run "${{env.issue_json}}"
+          dotnet run ""${{env.issue_json}}""
     
