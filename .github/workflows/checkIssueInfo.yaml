@@ -64,7 +64,7 @@ jobs:
       - name: Get Local Machine Information
         run: |
           pwd
-          ls -lR IssuesTypePredicter
+          ls -l IssuesTypePredicter
           echo ${{env.issue_json_string}}
       - name: Run Issues Type Predicter
         env:
