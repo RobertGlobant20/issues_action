@@ -70,7 +70,7 @@ jobs:
         id: replace_special_chars
         with:
           pattern: "\""
-          string: ${{env.issue_json_string}}
+          string: "${{env.issue_json_string}}"
           replace-with: '\\\"'
       - name: Run Issues Type Predicter
         env:
