@@ -81,5 +81,5 @@ jobs:
           dotnet restore
           dotnet build
           cd "../IssuesTypePredicterML.ConsoleApp/"
-          dotnet run "${{ steps.replace_special_chars.outputs.replaced }}"
+          dotnet run "${{ issue_json }}"
     
