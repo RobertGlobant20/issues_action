@@ -11,6 +11,8 @@ jobs:
       #and then checked on step two to know if adding the label and comment is necessary.
       #The initial 'undefined' value will be overridden when the script runs.
       analysis_response: undefined
+      parsed_issue_body: undefined
+      issue_json_string: undefined
       #issue_coment holds the comment format, while the missing information will be provided by analysis_response
       issue_comment: "This issue is missing information. Please, make sure to fill in all the necessary fields:"
       #template file name
