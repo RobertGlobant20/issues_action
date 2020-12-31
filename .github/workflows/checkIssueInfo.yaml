@@ -61,6 +61,6 @@ jobs:
           ls -la
       - name: Run Issues Type Predicter
         run: | 
-          cd "./IssuesTypePredicter/"
+          cd "./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/"
           dotnet run
     
