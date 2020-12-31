@@ -65,18 +65,11 @@ jobs:
         run: |
           pwd
           ls -lR IssuesTypePredicter
-      - name: Replace Special Chars
-        uses: frabert/replace-string-action@v1.2
-        id: replace_special_chars
-        with:
-          pattern: "\""
-          string: "\"${{env.issue_json_string}}\""
-          replace-with: '\\\"'
       - name: Run Issues Type Predicter
         env:
           issue_json: "{\\\"Number\\\":23,\\\"Title\\\":\\\"Testingtitle\\\",\\\"Description\\\":\\\"TestingDescription\\\"}"
         run: | 
-          echo "${{steps.replace_special_chars.outputs.replaced}}"
+          echo "${{env.issue_json_string}}"
           cd "./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/"
           dotnet run "${{env.issue_json}}"
     
