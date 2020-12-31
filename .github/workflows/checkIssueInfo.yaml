@@ -47,17 +47,20 @@ jobs:
         id: clean-issue-body
         run: |
           echo "parsed_issue_body=$(pwsh  .\\.github\\scripts\\issue_body_cleaner.ps1 "${{ github.event.issue.body }}" )"
-      - name: checkout IssuesTypePredicter
+      - name: Create IssuesTypePredicter folder
+        run: |
+          mkdir IssuesTypePredicter
+      - name: Checkout IssuesTypePredicter
         uses: actions/checkout@v2
         with:
           repository: RobertGlobant20/IssuesTypePredicter
+          path: IssuesTypePredicter
       - name: Get Local Machine Information
         run: |
           pwd
           ls -la
       - name: Run Issues Type Predicter
         run: | 
-          cd "./IssuesTypePredicterML.ConsoleApp/bin/Release/netcoreapp3.1/"
-          chmod +x ./IssuesTypePredicterML.exe
+          cd "./IssuesTypePredicter/"
           dotnet run
     
