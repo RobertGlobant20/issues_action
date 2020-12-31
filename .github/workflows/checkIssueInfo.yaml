@@ -63,6 +63,7 @@ jobs:
         env:
           issue_json: "\"{\"Number\":23,\"Title\":\"Testing title\",\"Description\":\"Testing Description\"}\""
         run: | 
+          echo ${issue_json}
           cd "./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/"
           dotnet run ${issue_json}
     
