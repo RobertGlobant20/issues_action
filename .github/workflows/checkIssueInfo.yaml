@@ -64,6 +64,10 @@ jobs:
           issue_json: "{\"Number\":23,\"Title\":\"Testingtitle\",\"Description\":\"TestingDescription\"}"
         run: | 
           echo ${issue_json}
-          cd "./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/"
+          cd "./IssuesTypePredicter/IssuesTypePredicterML.Model/"
+          dotnet restore
+          dotnet build
+          cd "../IssuesTypePredicterML.ConsoleApp/"
+          dotnet restore
           dotnet run ${issue_json}
     
