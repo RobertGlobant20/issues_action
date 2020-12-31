@@ -50,6 +50,11 @@ jobs:
       - name: Create IssuesTypePredicter folder
         run: |
           mkdir IssuesTypePredicter
+      - name: Create Issue JSON String
+        id: create-issue-json
+        run: |
+          echo "issue_json_string=$(pwsh  .\\.github\\scripts\\get_issue_json_body.ps1 "${{ github.event.issue.number }}" "${{ github.event.issue.title }}" "${{ env.parsed_issue_body}}" )"
+          echo ${{env.issue_json_string}}
       - name: Checkout IssuesTypePredicter
         uses: actions/checkout@v2
         with:
