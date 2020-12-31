@@ -34,7 +34,7 @@ jobs:
         id: check-info
         run: |
           ls -la
-          echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
+          echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )"
       - name: Label and comment issue
         if: env.analysis_response != 'Valid'
         run: |
@@ -48,7 +48,7 @@ jobs:
       - name: Clean Issue Body
         id: clean-issue-body
         run: |
-          echo "parsed_issue_body=$(pwsh  .\\.github\\scripts\\issue_body_cleaner.ps1 "${{ github.event.issue.body }}" )"
+          echo "parsed_issue_body=$(pwsh  .\\.github\\scripts\\issue_body_cleaner.ps1 "${{ github.event.issue.body }}" )" >> $GITHUB_ENV
       - name: Create IssuesTypePredicter folder
         run: |
           mkdir IssuesTypePredicter
