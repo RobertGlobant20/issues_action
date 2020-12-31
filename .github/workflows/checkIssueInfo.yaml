@@ -61,7 +61,7 @@ jobs:
           ls -la
       - name: Run Issues Type Predicter
         env:
-          issue_json: "{\"Number\":23, \"Title\":\"Testing title\", \"Description\":\"Testing Description\"}"
+          issue_json: "{\"Number\":\"23\", \"Title\":\"Testing title\", \"Description\":\"Testing Description\"}"
         run: | 
           cd "./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/"
           dotnet run ${issue_json}
