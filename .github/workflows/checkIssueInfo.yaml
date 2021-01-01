@@ -75,7 +75,7 @@ jobs:
           echo "is_wish_list="$(dotnet run "${{env.issue_json_string}}")"" >> $GITHUB_ENV
       - name: Is Wishlist?
         run: |
-          echo ${{ is_wish_list }}
+          echo ${{ env.is_wish_list }}
       - name: Label Wishlist
         if: env.analysis_response == 1
         run: |
