@@ -74,10 +74,6 @@ jobs:
         run: | 
           cd "./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/"
           echo "is_wish_list="$(dotnet run -v q "${{env.issue_json_string}}")"" >> $GITHUB_ENV
-      - name: Is Wishlist?
-        run: |
-          echo "${{ env.is_wish_list }}"
-          echo "output_validation="$(pwsh  .\\.github\\scripts\\validate_predicter_output.ps1 "${{ env.is_wish_list }}" "IsWishList:1" )""  >> $GITHUB_ENV
       - name: Label Wishlist
         if: contains(env.is_wish_list,'IsWishlist:1')
         run: |
