@@ -73,7 +73,10 @@ jobs:
         run: | 
           cd "./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/"
           echo "is_wish_list="$(dotnet run "${{env.issue_json_string}}")"" >> $GITHUB_ENV
-      - name: Is Wish List?
+      - name: Is Wishlist?
+        run: |
+          echo ${{ is_wish_list }}
+      - name: Label Wishlist
         if: env.analysis_response == 1
         run: |
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["Wishlist"]}' ${{ github.event.issue.url }}/labels
