@@ -72,7 +72,7 @@ jobs:
           issue_json: "{\\\"Number\\\":23,\\\"Title\\\":\\\"Testingtitle\\\",\\\"Description\\\":\\\"TestingDescription\\\"}" 
         run: | 
           cd "./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/"
-          echo "is_wish_list=$(dotnet run "${{env.issue_json_string}}")" >> $GITHUB_ENV
+          echo "is_wish_list="$(dotnet run "${{env.issue_json_string}}")"" >> $GITHUB_ENV
       - name: Is Wish List?
         if: env.analysis_response == 1
         run: |
