@@ -13,6 +13,7 @@ jobs:
       analysis_response: undefined
       parsed_issue_body: undefined
       issue_json_string: undefined
+      is_wish_list: undefined
       #issue_coment holds the comment format, while the missing information will be provided by analysis_response
       issue_comment: "This issue is missing information. Please, make sure to fill in all the necessary fields:"
       #template file name
@@ -68,8 +69,12 @@ jobs:
           echo "${{env.issue_json_string}}"
       - name: Run Issues Type Predicter
         env:
-          issue_json: "{\\\"Number\\\":23,\\\"Title\\\":\\\"Testingtitle\\\",\\\"Description\\\":\\\"TestingDescription\\\"}"
+          issue_json: "{\\\"Number\\\":23,\\\"Title\\\":\\\"Testingtitle\\\",\\\"Description\\\":\\\"TestingDescription\\\"}" 
         run: | 
           cd "./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/"
-          dotnet run "${{env.issue_json_string}}"
+          echo "is_wish_list=$(dotnet run "${{env.issue_json_string}}")" >> $GITHUB_ENV
+      - name: Is Wish List?
+        if: env.analysis_response == 1
+        run: |
+          curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["Wishlist"]}' ${{ github.event.issue.url }}/labels
     
