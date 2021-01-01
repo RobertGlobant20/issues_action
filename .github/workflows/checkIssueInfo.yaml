@@ -77,7 +77,7 @@ jobs:
         run: |
           echo "${{ env.is_wish_list }}"
       - name: Label Wishlist
-        if: env.analysis_response == 1
+        if: contains(env.analysis_response,"IsWishlist:1")
         run: |
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["Wishlist"]}' ${{ github.event.issue.url }}/labels
     
