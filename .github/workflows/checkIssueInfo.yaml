@@ -13,6 +13,7 @@ jobs:
       analysis_response: undefined
       parsed_issue_body: undefined
       issue_json_string: undefined
+      output_validation: undefined
       is_wish_list: undefined
       #issue_coment holds the comment format, while the missing information will be provided by analysis_response
       issue_comment: "This issue is missing information. Please, make sure to fill in all the necessary fields:"
@@ -76,8 +77,9 @@ jobs:
       - name: Is Wishlist?
         run: |
           echo "${{ env.is_wish_list }}"
+          echo "output_validation="$(pwsh  .\\.github\\scripts\\validate_predicter_output.ps1 "${{ env.is_wish_list }}" "IsWishList:1" )""  >> $GITHUB_ENV
       - name: Label Wishlist
-        if: contains(env.analysis_response,'IsWishlist:1')
+        if: contains(env.is_wish_list,'IsWishlist:1')
         run: |
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["Wishlist"]}' ${{ github.event.issue.url }}/labels
     
