@@ -48,6 +48,7 @@ jobs:
           echo urldecode ${{env.issue_label}}
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -X DELETE ${{ github.event.issue.url }}/labels/$(echo -ne "${{env.issue_label}}" | xxd -plain | tr -d '\n' | sed 's/\(..\)/%\1/g')
       - name: Clean Issue Body
+        if: env.analysis_response == 'Valid'
         id: clean-issue-body
         run: |
           echo "parsed_issue_body="$(pwsh  .\\.github\\scripts\\issue_body_cleaner.ps1 "${{ steps.remove_quotations.outputs.replaced }}" )"" >> $GITHUB_ENV
@@ -55,27 +56,33 @@ jobs:
         run: |
           mkdir IssuesTypePredicter
       - name: Create Issue JSON String
+        if: env.analysis_response == 'Valid'
         id: create-issue-json
         run: |
           echo "issue_json_string="$(pwsh  .\\.github\\scripts\\get_issue_json_body.ps1 "${{ github.event.issue.number }}" "${{ github.event.issue.title }}" "${{env.parsed_issue_body}}" )""  >> $GITHUB_ENV
       - name: Checkout IssuesTypePredicter
+        if: env.analysis_response == 'Valid'
         uses: actions/checkout@v2
         with:
           repository: RobertGlobant20/IssuesTypePredicter
           path: IssuesTypePredicter
       - name: Get Local Machine Information
+        if: env.analysis_response == 'Valid'
         run: |
           pwd
           ls -l IssuesTypePredicter
           echo "${{env.issue_json_string}}"
       - name: Run Issues Type Predicter
-        env:
-          issue_json: "{\\\"Number\\\":23,\\\"Title\\\":\\\"Testingtitle\\\",\\\"Description\\\":\\\"TestingDescription\\\"}" 
+        if: env.analysis_response == 'Valid'
         run: | 
           cd "./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/"
           echo "is_wish_list="$(dotnet run -v q "${{env.issue_json_string}}")"" >> $GITHUB_ENV
       - name: Label Wishlist
-        if: contains(env.is_wish_list,'IsWishlist:1')
+        if: contains(env.is_wish_list,'IsWishlist:1') && env.analysis_response == 'Valid'
         run: |
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["Wishlist"]}' ${{ github.event.issue.url }}/labels
+      - name: Label NotMLPredicted
+        if: env.analysis_response != 'Valid'
+        run: |
+          curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["NotMLPredicted"]}' ${{ github.event.issue.url }}/labels
     
