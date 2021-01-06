@@ -82,7 +82,7 @@ jobs:
         run: |
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["Wishlist"]}' ${{ github.event.issue.url }}/labels
       - name: Label NotMLPredicted
-        if: env.analysis_response != 'Valid'
+        if: env.analysis_response != 'Valid' || env.issue_json_string == ""
         run: |
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["NotMLPredicted"]}' ${{ github.event.issue.url }}/labels
     
