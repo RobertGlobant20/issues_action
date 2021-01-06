@@ -81,8 +81,8 @@ jobs:
         if: contains(env.is_wish_list,'IsWishlist:1') && env.analysis_response == 'Valid'
         run: |
           curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["Wishlist"]}' ${{ github.event.issue.url }}/labels
-      - name: Label NotMLPredicted
+      - name: Label NotMLEvaluated
         if: env.analysis_response != 'Valid' || env.issue_json_string == ""
         run: |
-          curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["NotMLPredicted"]}' ${{ github.event.issue.url }}/labels
+          curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["NotMLEvaluated"]}' ${{ github.event.issue.url }}/labels
     
