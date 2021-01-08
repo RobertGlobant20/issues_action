@@ -10,17 +10,8 @@ param([string]$issueTemplateFile, [string]$issueContent, [int]$acceptableEmptyFi
 . .\.github\scripts\issue_parser.ps1
 
 #--Processing--
-#$issueTemplateFile = "ISSUE_TEMPLATE\dynamo-issue.md"
 $issueTemplate = Get-Content -Raw -Path .github\$issueTemplateFile
 
-#$Request = "https://api.github.com/repos/DynamoDS/DynamoWishlist/issues/109"
-#$Response = Invoke-WebRequest -URI $Request | 
-#			ConvertFrom-Json | 
-#            Select-Object number, title, body
-
-#$issueContent = $Response.body
-
-            
 #Parse the template and issue
 $parsed_issue_content = Get_Parsed_Issue $issueContent
 $parsed_issue_template = Get_Parsed_Issue $issueTemplate
@@ -33,34 +24,24 @@ $analysis_result = " "
 
 #Checks for missing content on the comparator result and loads
 #$analysis_result with the corresponding section title
+$FullyEmpty = "True"
+foreach ($Section in $comparation_result) {
 
-$empty_contents = $comparation_result | Where-Object {$_.Content -eq ''}
-
-if ($empty_contents.Count -lt  $comparation_result.Count)
-{
-    $FullyEmpty = "True"
-    foreach ($Section in $comparation_result) {
-
-        if ($Section.TitleStatus -ne "New") {
-            if (($Section.ContentStatus -eq "Empty") -or ($Section.ContentStatus -eq "NotFound")) {
-                $script:analysis_result = "$($script:analysis_result) \n- $($Section.Title)"
-                $script:missingFields = $script:missingFields + 1
-            }
-            else {
-                $FullyEmpty = "False"
-            }
+    if ($Section.TitleStatus -ne "New") {
+        if (($Section.ContentStatus -eq "Empty") -or ($Section.ContentStatus -eq "NotFound")) {
+            $script:analysis_result = "$($script:analysis_result) \n- $($Section.Title)"
+            $script:missingFields = $script:missingFields + 1
+        }
+        else {
+            $FullyEmpty = "False"
         }
     }
-
-    if($FullyEmpty -eq "True") { $analysis_result = "Empty" }
-
-    #If no missing information was found then the issue is Valid
-    if (($analysis_result -eq " ") -or ($missingFields -le $acceptableEmptyFields)) { $analysis_result = "Valid" }
 }
-elseif ($empty_contents.Count -eq  $comparation_result.Count)
-{
-    $analysis_result = "Empty"
-}
+
+if($FullyEmpty -eq "True") { $analysis_result = "Empty" }
+
+#If no missing information was found then the issue is Valid
+if (($analysis_result -eq " ") -or ($missingFields -le $acceptableEmptyFields)) { $analysis_result = "Valid" }
 
 #--Output--
 #"Valid" if the issue has the necessary information
