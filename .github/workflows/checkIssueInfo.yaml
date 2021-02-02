@@ -64,14 +64,12 @@ jobs:
         if: env.analysis_response == 'Valid'
         uses: actions/checkout@v2
         with:
-          repository: RobertGlobant20/IssuesTypePredicter
+          repository: RobertGlobant20/IssuesTypePredicter2
           path: IssuesTypePredicter
-      - name: Get Local Machine Information
+      - name: Compile Issues Type Predicter
         if: env.analysis_response == 'Valid'
-        run: |
-          pwd
-          ls -l IssuesTypePredicter
-          echo "${{env.issue_json_string}}"
+        run: | 
+          dotnet build ./IssuesTypePredicter/IssuesTypePredicter.sln --configuration Release
       - name: Run Issues Type Predicter
         if: env.analysis_response == 'Valid'
         run: | 
