@@ -70,6 +70,7 @@ jobs:
         if: env.analysis_response == 'Valid'
         run: | 
           dotnet build ./IssuesTypePredicter/IssuesTypePredicter.sln --configuration Release
+          cp ./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/bin/Release/netcoreapp3.1/MLModel.zip .
       - name: Run Issues Type Predicter
         if: env.analysis_response == 'Valid'
         run: | 
