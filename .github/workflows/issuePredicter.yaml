@@ -50,7 +50,7 @@ jobs:
         if: env.analysis_response == 'Valid'
         uses: actions/checkout@v2
         with:
-          repository: RobertGlobant20/IssuesTypePredicter2
+          repository: DynamoDS/IssuesTypePredicter
           path: IssuesTypePredicter
       - name: Build Issues Type Predicter 
         if: env.analysis_response == 'Valid'
