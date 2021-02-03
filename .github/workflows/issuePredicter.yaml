@@ -11,9 +11,11 @@ jobs:
       #and then checked on step two to know if adding the label and comment is necessary.
       #The initial 'undefined' value will be overridden when the script runs.
       analysis_response: undefined
+      #The 'parsed_issue_body' variable is used to store the parsed issue body (removing some sections of the body like Stack Trace)
       parsed_issue_body: undefined
+      #The 'issue_json_string' variable is used to store in a json string the parsed info of the issue body
       issue_json_string: undefined
-      output_validation: undefined
+      #The 'is_wish_list' variable is used to store the value returned by the IssuesTypePredicter project
       is_wish_list: undefined
       #template file name
       template: "ISSUE_TEMPLATE.md"
@@ -38,13 +40,11 @@ jobs:
         id: clean-issue-body
         run: |
           echo "parsed_issue_body="$(pwsh  .\\.github\\scripts\\issue_body_cleaner.ps1 "${{ steps.remove_quotations.outputs.replaced }}" )"" >> $GITHUB_ENV
-      - name: Create IssuesTypePredicter folder
-        run: |
-          mkdir IssuesTypePredicter
       - name: Create Issue JSON String
         if: env.analysis_response == 'Valid'
         id: create-issue-json
         run: |
+          mkdir IssuesTypePredicter
           echo "issue_json_string="$(pwsh  .\\.github\\scripts\\get_issue_json_body.ps1 "${{ github.event.issue.number }}" "${{ github.event.issue.title }}" "${{env.parsed_issue_body}}" )""  >> $GITHUB_ENV
       - name: Checkout IssuesTypePredicter
         if: env.analysis_response == 'Valid'
@@ -52,7 +52,7 @@ jobs:
         with:
           repository: RobertGlobant20/IssuesTypePredicter2
           path: IssuesTypePredicter
-      - name: Compile Issues Type Predicter
+      - name: Build Issues Type Predicter 
         if: env.analysis_response == 'Valid'
         run: | 
           dotnet build ./IssuesTypePredicter/IssuesTypePredicter.sln --configuration Release
