@@ -34,4 +34,4 @@ jobs:
         run: hub issue transfer ${{github.event.issue.number}} ${{matrix.repoName}}
         env:
           #Uses DYNAMOBOTTOKEN to allow interaction between repos
-          GITHUB_TOKEN: ${{ secrets.MOVE_ISSUE }}
+          GITHUB_TOKEN: ${{ secrets.ISSUES_ACTIONS_TOKEN }}
