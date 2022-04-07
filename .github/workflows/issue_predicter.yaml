@@ -53,6 +53,7 @@ jobs:
         run: |
           mkdir IssuesTypePredicter
           echo "issue_json_string="$(pwsh  .\\.github\\scripts\\get_issue_json_body.ps1 "${{ github.event.issue.number }}" "${{ github.event.issue.title }}" "${{env.parsed_issue_body}}" )""  >> $GITHUB_ENV
+          echo "$GITHUB_ENV"
 
       #Now checkout the IssuesTypePredicter source code from the repo https://github.com/DynamoDS/IssuesTypePredicter
       - name: Checkout IssuesTypePredicter
