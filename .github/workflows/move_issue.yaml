@@ -26,6 +26,18 @@ jobs:
         run: |
           curl -v -u admin:${{ secrets.ISSUES_ACTIONS_TOKEN }} -d '{"labels": ["Wishlist"]}' ${{ github.event.issue.url }}/labels
 
+        #Adds a comment to the issue before moving it
+      - name: Add comment 2
+        if: (github.event.label.name == matrix.label)
+        uses: ben-z/actions-comment-on-issue@1.0.2
+        with:
+          message: ${{ env.bot_comment }}
+          GITHUB_TOKEN: ${{ secrets.ISSUES_ACTIONS_TOKEN }}
+
+      - name: Label Wishlist 2
+        run: |
+          curl -v -u admin:${{ secrets.GITHUB_TOKEN }} -d '{"labels": ["Wishlist"]}' ${{ github.event.issue.url }}/labels
+
       #Adds a comment to the issue before moving it
       - name: Add comment
         if: (github.event.label.name == matrix.label)
