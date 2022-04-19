@@ -29,6 +29,14 @@ jobs:
           message: ${{ env.bot_comment }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+        #Adds a comment to the issue before moving it
+      - name: Add comment SECRET
+        if: (github.event.label.name == matrix.label)
+        uses: ben-z/actions-comment-on-issue@1.0.2
+        with:
+          message: ${{ env.bot_comment }}
+          GITHUB_TOKEN: ${{ secrets.ISSUES_ACTIONS_TOKEN }}
+
       #Move the issue depending on its labels
       - name: (Label ${{ matrix.label }}) Move to ${{ matrix.repoName }}
         if: (github.event.label.name == matrix.label)
