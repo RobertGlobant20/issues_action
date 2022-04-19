@@ -2,6 +2,7 @@ name: Move issue by labels
 on: 
   issues:
     types: [labeled]
+permissions: read-all
 jobs: 
   gitIssueTransfer:
     env:
