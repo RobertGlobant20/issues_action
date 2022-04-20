@@ -32,7 +32,7 @@ jobs:
         id: remove_quotations
         with:
           pattern: "\""
-          string: $ISSUE_BODY
+          string: ${{env.ISSUE_BODY}}
           replace-with: '-'
 
        #Checks for missing information inside the issue content
