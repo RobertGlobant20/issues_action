@@ -82,6 +82,11 @@ jobs:
       #amount of sections from the template that can be missing information for the issue to still be considered complete
       acceptable_missing_info: 1
     steps:
+      - name: PRINT BODY
+        env:
+          ISSUE_BODY: ${{github.event.issue.body}}
+        run: |
+          echo $ISSUE_BODY
       #Checkout the repo
       - uses: actions/checkout@v2
 
