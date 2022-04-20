@@ -101,6 +101,7 @@ jobs:
       - name: Check Information
         id: check-info
         run: |
+          echo "BODY: ${{ steps.remove_quotations.outputs.replaced }}"
           echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
       
       #Closes the issue if the analysis response is "Empty"
