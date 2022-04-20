@@ -98,7 +98,7 @@ jobs:
         id: remove_quotations
         with:
           pattern: "\""
-          string: $ISSUE_BODY
+          string: ${{github.event.issue.body}}
           replace-with: '-'
           flags: g
 
