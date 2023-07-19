@@ -31,6 +31,7 @@ jobs:
           ISSUE_TITLE_PARSED: ${{steps.remove_quotations.outputs.replaced}}
         id: check-info
         run: |
+          echo ${{ env.ISSUE_TITLE_PARSED }}
           echo "content_analysis_response=$(pwsh .\\.github\\scripts\\title_analyzer.ps1 "${{ env.ISSUE_TITLE_PARSED }}" )" >> $GITHUB_ENV
       - name: Label issue
         if: env.content_analysis_response != 'Valid'
