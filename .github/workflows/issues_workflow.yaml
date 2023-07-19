@@ -23,13 +23,15 @@ jobs:
         id: remove_quotations
         with:
           pattern: "\""
-          string: $ISSUE_TITLE
+          string:  ${{env.ISSUE_TITLE}}
           replace-with: '-'
           flags: g    
       - name: Check Information
+        env:
+          ISSUE_TITLE_PARSED: ${{steps.remove_quotations.outputs.replaced}}
         id: check-info
         run: |
-          echo "content_analysis_response=$(pwsh .\\.github\\scripts\\title_analyzer.ps1 "${{ steps.remove_quotations.outputs.replaced }}" )" >> $GITHUB_ENV
+          echo "content_analysis_response=$(pwsh .\\.github\\scripts\\title_analyzer.ps1 "${{ env.ISSUE_TITLE_PARSED }}" )" >> $GITHUB_ENV
       - name: Label issue
         if: env.content_analysis_response != 'Valid'
         #Uses GITHUB_TOKEN to allow interaction between repos
