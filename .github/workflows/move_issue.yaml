@@ -33,7 +33,7 @@ jobs:
         with:
           issue-number: ${{github.event.issue.number}}
           body: ${{ env.bot_comment }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ISSUES_ACTIONS_TOKEN }}
 
       #Move the issue depending on its labels
       - name: (Label ${{ matrix.label }}) Move to ${{ matrix.repoName }}
