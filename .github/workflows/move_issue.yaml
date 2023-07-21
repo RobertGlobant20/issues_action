@@ -24,6 +24,7 @@ jobs:
       - name: Label Wishlist
         run: |
           curl -v -u admin:${{ secrets.ISSUES_ACTIONS_TOKEN }} -d '{"labels": ["Wishlist"]}' ${{ github.event.issue.url }}/labels
+          npm --version
 
       #Adds a comment to the issue before moving it
       - name: Add comment
