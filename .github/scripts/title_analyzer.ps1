@@ -8,8 +8,6 @@ $labelsData = .\.github\LabelsKeywordsConfig.ps1
 
 $label = 'undefined'
 
-Write-Output ("Powershell Script:")
-
 #Iterates over the posible labels
 foreach ($labelData in $labelsData) {
     #Iterates over the different keywords for the specific label
