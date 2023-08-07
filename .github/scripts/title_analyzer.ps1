@@ -9,7 +9,7 @@ $labelsData = .\.github\LabelsKeywordsConfig.ps1
 $label = 'undefined'
 
 Write-Output ("Powershell Script:")
-ls env:
+Write-Host $Env:PATH
 
 #Iterates over the posible labels
 foreach ($labelData in $labelsData) {
