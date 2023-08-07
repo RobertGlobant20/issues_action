@@ -33,7 +33,6 @@ jobs:
         run: |
           echo ${{ env.ISSUE_TITLE_PARSED }}
           echo "content_analysis_response=$(pwsh .\\.github\\scripts\\title_analyzer.ps1 "${{ env.ISSUE_TITLE_PARSED }}" )" >> $GITHUB_ENV
-          echo ${{env.content_analysis_response}}
       - name: Label issue
         if: env.content_analysis_response != 'Valid'
         #Uses GITHUB_TOKEN to allow interaction between repos
