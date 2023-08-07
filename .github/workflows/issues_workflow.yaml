@@ -12,6 +12,7 @@ jobs:
       #and then checked on step two to know if adding any labels is necessary.
       #The initial 'undefined' value will be overridden when the script runs.
       content_analysis_response: undefined
+      ISSUE_TITLE: ${{github.event.issue.title}}
     outputs:
       result: ${{env.content_analysis_response}}
     steps:
@@ -29,8 +30,6 @@ jobs:
           echo "Bad Issue Title Format"
           exit 1
       - name: Remove conflicting chars
-        env:
-          ISSUE_TITLE: ${{github.event.issue.title}}
         uses: frabert/replace-string-action@v1.2
         id: remove_quotations
         with:
