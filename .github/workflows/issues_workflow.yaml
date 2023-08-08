@@ -49,7 +49,7 @@ jobs:
       - name: Check Information
         id: check-info
         env:
-          ISSUE_TITLE: ${{steps.remove_quotations.outputs.replaced}}
+          ISSUE_TITLE_PARSED: ${{steps.remove_quotations.outputs.replaced}}
         run: |
           echo "content_analysis_response=$(pwsh .\\.github\\scripts\\title_analyzer.ps1)" >> $GITHUB_ENV
 
