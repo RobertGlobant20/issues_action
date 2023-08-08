@@ -3,9 +3,7 @@
 #issueContent: Body of the issue to be analyzed
 #acceptableEmptyFields: Amount of fields from the template that can be missing information
 #                       in the issue (1 if unspecified)
-param([string]$issueTemplateFile, [int]$acceptableEmptyFields = 1)
-
-$issueContent = $env:IssueBodyEnvVar
+param([string]$issueTemplateFile, [string]$issueContent, [int]$acceptableEmptyFields = 1)
 
 #Loads the requiered functions
 . .\.github\scripts\issue_comparator.ps1
