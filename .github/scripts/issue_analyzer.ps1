@@ -12,6 +12,8 @@ param([string]$issueTemplateFile, [string]$issueContent, [int]$acceptableEmptyFi
 #--Processing--
 $issueTemplate = Get-Content -Raw -Path .github\$issueTemplateFile
 
+$env:ISSUE_BODY
+
 #Parse the template and issue
 $parsed_issue_content = Get_Parsed_Issue $issueContent
 $parsed_issue_template = Get_Parsed_Issue $issueTemplate
