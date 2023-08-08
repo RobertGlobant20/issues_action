@@ -43,7 +43,6 @@ jobs:
       - name: Check Information
         id: check-info
         run: |
-          ls -la
           echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
       
       #Remove sections in the issue body like "Dynamo version", "Stack Trace" because won't be used to predict the issue type

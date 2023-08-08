@@ -32,11 +32,17 @@ jobs:
           pattern: "\""
           string: ${{ github.event.issue.body }}
           replace-with: '-'
+
+      #Define a env variable with the issue_title so later can be used in a powershell script
+      - name: Set IssueBody Variable
+        run: |
+          echo "IssueBodyEnvVar=${{steps.remove_quotations.outputs.replaced}}" >> $GITHUB_ENV
+
       - name: Check Information
         id: check-info
         run: |
           ls -la
-          echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
+          echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
       - name: Label and comment issue
         if: env.analysis_response != 'Valid'
         run: |

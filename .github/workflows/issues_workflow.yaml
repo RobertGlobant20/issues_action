@@ -127,7 +127,7 @@ jobs:
           flags: g
 
       #Define a env variable with the issue_title so later can be used in a powershell script
-      - name: Set IssueTitle Variable
+      - name: Set IssueBody Variable
         run: |
           echo "IssueBodyEnvVar=${{steps.remove_quotations.outputs.replaced}}" >> $GITHUB_ENV
 
