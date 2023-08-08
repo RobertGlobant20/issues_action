@@ -1,5 +1,3 @@
-param([string]$issueContent)
-
 #Loads the requiered functions
 . .\.github\scripts\issue_parser.ps1
 
@@ -23,6 +21,8 @@ function RemoveSpecialCharacters($InputString)
 	$InputString = $InputString.Replace('(Fill in here)','') 
 	return $InputString
 }
+
+$issueContent = $env:IssueBodyEnvVar
 
 $TitleFilters = @("Dynamo version".ToLower(),
 				 "Operating system".ToLower(),

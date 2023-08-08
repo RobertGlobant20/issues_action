@@ -1,8 +1,7 @@
-param([int]$issueNumber, [string]$issueTitle, [string]$issueDescription)
+param([int]$issueNumber)
 
-#$issueNumber = 12
-#$issueTitle = "Title"
-#$issueDescription = "Description"
+$issueTitle = $env:IssueTitleEnvVar
+$issueDescription = $env:parsed_issue_body
 
 $json_object = @{ 
 				Number = $issueNumber 
