@@ -39,7 +39,7 @@ jobs:
           flags: g    
       - name: Test Env Variables
         run: |
-        echo "TestVar="hello world"" >> $GITHUB_ENV
+        echo "TestVar=$ISSUE_TITLE" >> $GITHUB_ENV
       - name: Check Information
         env:
           ISSUE_TITLE_PARSED: ${{steps.remove_quotations.outputs.replaced}}
