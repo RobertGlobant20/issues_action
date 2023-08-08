@@ -37,16 +37,15 @@ jobs:
           string:  ${{env.ISSUE_TITLE}}
           replace-with: '-'
           flags: g    
-      - name: Test Env Variables
+      - name: Set IssueTitle Variable
         run: |
-          echo "TestVar=$ISSUE_TITLE" >> $GITHUB_ENV
+          echo "IssueTitleEnvVar=steps.remove_quotations.outputs.replaced" >> $GITHUB_ENV
       - name: Check Information
         env:
           ISSUE_TITLE_PARSED: ${{steps.remove_quotations.outputs.replaced}}
         id: check-info
         run: |
-          echo ${{ env.ISSUE_TITLE_PARSED }}
-          echo "content_analysis_response=$(pwsh .\\.github\\scripts\\title_analyzer.ps1 "${{ env.ISSUE_TITLE_PARSED }}" )" >> $GITHUB_ENV
+          echo "content_analysis_response=$(pwsh .\\.github\\scripts\\title_analyzer.ps1)" >> $GITHUB_ENV
       - name: Label issue
         if: env.content_analysis_response != 'Valid'
         #Uses GITHUB_TOKEN to allow interaction between repos

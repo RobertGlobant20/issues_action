@@ -1,12 +1,9 @@
-#--Params--
-#issueTitle: Title of the issue
-param([string]$issueTitle)
-
 #Contains a collection of {Label, Keywords}. 
 #"label" is the label to be use if specific "keywords" are found on a section
 $labelsData = .\.github\LabelsKeywordsConfig.ps1
 
 $label = 'undefined'
+$issueTitle = $env:IssueTitleEnvVar
 
 #Iterates over the posible labels
 foreach ($labelData in $labelsData) {
