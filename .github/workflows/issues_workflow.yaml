@@ -13,6 +13,7 @@ jobs:
       #The initial 'undefined' value will be overridden when the script runs.
       content_analysis_response: undefined
       ISSUE_TITLE: ${{github.event.issue.title}}
+      ISSUE_BODY: ${{github.event.issue.body}}
     outputs:
       result: ${{env.content_analysis_response}}
     steps:
