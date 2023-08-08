@@ -39,7 +39,7 @@ jobs:
           flags: g    
       - name: Set IssueTitle Variable
         run: |
-          echo "IssueTitleEnvVar=steps.remove_quotations.outputs.replaced" >> $GITHUB_ENV
+          echo "IssueTitleEnvVar=${{steps.remove_quotations.outputs.replaced}}" >> $GITHUB_ENV
       - name: Check Information
         env:
           ISSUE_TITLE_PARSED: ${{steps.remove_quotations.outputs.replaced}}
