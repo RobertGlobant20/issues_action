@@ -42,8 +42,10 @@ jobs:
        #Checks for missing information inside the issue content
       - name: Check Information
         id: check-info
+        env:
+          ISSUE_BODY: ${{ steps.remove_quotations.outputs.replaced }}
         run: |
-          echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
+          echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
       
       #Remove sections in the issue body like "Dynamo version", "Stack Trace" because won't be used to predict the issue type
       - name: Clean Issue Body

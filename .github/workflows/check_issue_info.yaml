@@ -35,8 +35,11 @@ jobs:
 
       - name: Check Information
         id: check-info
+        env:
+          ISSUE_BODY: ${{ steps.remove_quotations.outputs.replaced }}
         run: |
-          echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
+          echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
+
       - name: Label and comment issue
         if: env.analysis_response != 'Valid'
         run: |
