@@ -58,6 +58,7 @@ jobs:
         if: env.content_analysis_response != 'Valid'
         #Uses DYNAMOBOTTOKEN to allow interaction between repos
         run: |
+          echo ${{env.content_analysis_response}}
           curl -v -u admin:${{ secrets.DYNAMOBOTTOKEN }} -d '{"labels": ["${{env.content_analysis_response}}"]}' ${{ github.event.issue.url }}/labels
   
   #This job will scan the issue content to determing if more information is needed and act acordingly
