@@ -32,11 +32,10 @@ jobs:
           pattern: "\""
           string: ${{ github.event.issue.body }}
           replace-with: '-'
-          
+
       - name: Check Information
         id: check-info
         run: |
-          ls -la
           echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
       - name: Label and comment issue
         if: env.analysis_response != 'Valid'
