@@ -56,9 +56,9 @@ jobs:
       #labels the issue based in the text returned in content_analysis_response var
       - name: Label issue
         if: env.content_analysis_response != 'Valid'
-        #Uses GITHUB_TOKEN to allow interaction between repos
+        #Uses DYNAMOBOTTOKEN to allow interaction between repos
         run: |
-          curl -v -u admin:${{ secrets.ISSUES_ACTIONS_TOKEN }} -d '{"labels": ["${{env.content_analysis_response}}"]}' ${{ github.event.issue.url }}/labels
+          curl -v -u admin:${{ secrets.DYNAMOBOTTOKEN }} -d '{"labels": ["${{env.content_analysis_response}}"]}' ${{ github.event.issue.url }}/labels
   
   #This job will scan the issue content to determing if more information is needed and act acordingly
   #Will only run if the "redirectIssue" job outputted a 'Valid' result
@@ -106,11 +106,6 @@ jobs:
       #amount of sections from the template that can be missing information for the issue to still be considered complete
       acceptable_missing_info: 1
     steps:
-      - name: PRINT BODY
-        env:
-          ISSUE_BODY: ${{github.event.issue.body}}
-        run: |
-          echo $ISSUE_BODY
       #Checkout the repo
       - uses: actions/checkout@v2
 
@@ -132,7 +127,6 @@ jobs:
         env:
           ISSUE_BODY: ${{ steps.remove_quotations.outputs.replaced }}
         run: |
-          echo "BODY: ${{ steps.remove_quotations.outputs.replaced }}"
           echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
       
       #Closes the issue if the analysis response is "Empty"

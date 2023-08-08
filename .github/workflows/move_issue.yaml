@@ -21,19 +21,13 @@ jobs:
       - uses: actions/checkout@v2
 
       #Adds a comment to the issue before moving it
-      - name: Label Wishlist
-        run: |
-          curl -v -u admin:${{ secrets.ISSUES_ACTIONS_TOKEN }} -d '{"labels": ["Wishlist"]}' ${{ github.event.issue.url }}/labels
-          npm --version
-
-      #Adds a comment to the issue before moving it
       - name: Add comment
         if: (github.event.label.name == matrix.label)
         uses: peter-evans/create-or-update-comment@v3
         with:
           issue-number: ${{github.event.issue.number}}
           body: ${{ env.bot_comment }}
-          token: ${{ secrets.ISSUES_ACTIONS_TOKEN }}
+          token: ${{ secrets.DYNAMOBOTTOKEN }}
 
       #Move the issue depending on its labels
       - name: (Label ${{ matrix.label }}) Move to ${{ matrix.repoName }}
@@ -41,4 +35,4 @@ jobs:
         run: hub issue transfer ${{github.event.issue.number}} ${{matrix.repoName}}
         env:
           #Uses DYNAMOBOTTOKEN to allow interaction between repos
-          GITHUB_TOKEN: ${{ secrets.ISSUES_ACTIONS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DYNAMOBOTTOKEN }}

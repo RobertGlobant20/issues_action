@@ -1,10 +1,13 @@
 <#
 .SYNOPSIS
 Compare two arrays with template/issue information
+
 .DESCRIPTION
  This method will receive two parameters of type Array[Hashtable], the first one contains the template information and the second one contains information about the issue filled in github/issues section.
+
 .PARAMETER InputTemplateArray
 Array[Hashtable] containing the template information
+
 .PARAMETER InputIssueFilledArray
 Array[Hashtable] containing the issue information filled by the user in github/issues section
 #>
