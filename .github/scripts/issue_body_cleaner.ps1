@@ -1,3 +1,4 @@
+param([string]$issueContent)
 #Loads the requiered functions
 . .\.github\scripts\issue_parser.ps1
 

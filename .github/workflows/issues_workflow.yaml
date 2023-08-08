@@ -17,6 +17,8 @@ jobs:
       result: ${{env.content_analysis_response}}
     steps:
       - uses: actions/checkout@v2
+
+      #Detect if the issue_title follows the regex expression
       - name: Check Issue Title
         uses: actions-ecosystem/action-regex-match@v2
         id: regex-match
@@ -24,6 +26,8 @@ jobs:
           text: ${{github.event.issue.title}}
           regex: '^[A-Za-z0-9 _.]*$'
           flags: g
+
+      #If the regex output is '' means that the issue title contains special chars
       - name: Exit Job
         if: ${{ steps.regex-match.outputs.match == '' }}
         run: |
@@ -37,15 +41,19 @@ jobs:
           string:  ${{env.ISSUE_TITLE}}
           replace-with: '-'
           flags: g    
+
+      #Define a env variable with the issue_title so later can be used in a powershell script
       - name: Set IssueTitle Variable
         run: |
           echo "IssueTitleEnvVar=${{steps.remove_quotations.outputs.replaced}}" >> $GITHUB_ENV
+
+      #According to the issue_title returns a specific label 
       - name: Check Information
-        env:
-          ISSUE_TITLE_PARSED: ${{steps.remove_quotations.outputs.replaced}}
         id: check-info
         run: |
           echo "content_analysis_response=$(pwsh .\\.github\\scripts\\title_analyzer.ps1)" >> $GITHUB_ENV
+
+      #labels the issue based in the text returned in content_analysis_response var
       - name: Label issue
         if: env.content_analysis_response != 'Valid'
         #Uses GITHUB_TOKEN to allow interaction between repos
@@ -118,6 +126,7 @@ jobs:
           replace-with: '-'
           flags: g
 
+      #Define a env variable with the issue_title so later can be used in a powershell script
       - name: Set IssueTitle Variable
         run: |
           echo "IssueBodyEnvVar=${{steps.remove_quotations.outputs.replaced}}" >> $GITHUB_ENV
