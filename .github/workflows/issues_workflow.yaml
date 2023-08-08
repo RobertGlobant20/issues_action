@@ -118,12 +118,16 @@ jobs:
           replace-with: '-'
           flags: g
 
+      - name: Set IssueTitle Variable
+        run: |
+          echo "IssueBodyEnvVar=${{steps.remove_quotations.outputs.replaced}}" >> $GITHUB_ENV
+
       #Checks for missing information inside the issue content
       - name: Check Information
         id: check-info
         run: |
           echo "BODY: ${{ steps.remove_quotations.outputs.replaced }}"
-          echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ steps.remove_quotations.outputs.replaced }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
+          echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
       
       #Closes the issue if the analysis response is "Empty"
       - name: Close issue
