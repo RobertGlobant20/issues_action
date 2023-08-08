@@ -3,7 +3,7 @@
 $labelsData = .\.github\LabelsKeywordsConfig.ps1
 
 $label = 'undefined'
-$issueTitle = $env:IssueTitleEnvVar
+$issueTitle = $env:ISSUE_TITLE_PARSED
 
 #Iterates over the posible labels
 foreach ($labelData in $labelsData) {

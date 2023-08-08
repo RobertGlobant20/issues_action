@@ -35,15 +35,12 @@ jobs:
           string: ${{env.ISSUE_BODY}}
           replace-with: '-'
 
-      - name: Set IssueTitle Variable
-        run: |
-          echo "IssueTitleEnvVar=${{github.event.issue.title}}" >> $GITHUB_ENV
-
        #Checks for missing information inside the issue content
       - name: Check Information
         id: check-info
         env:
           ISSUE_BODY: ${{ steps.remove_quotations.outputs.replaced }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
         run: |
           echo "analysis_response=$(pwsh .\\.github\\scripts\\issue_analyzer.ps1 "${{ env.template }}" "${{ env.acceptable_missing_info }}" )" >> $GITHUB_ENV
       
@@ -54,12 +51,13 @@ jobs:
         if: env.analysis_response == 'Valid'
         id: clean-issue-body
         run: |
-          echo "parsed_issue_body="$(pwsh  .\\.github\\scripts\\issue_body_cleaner.ps1 "${{ env.ISSUE_BODY_PARSED }}" )"" >> $GITHUB_ENV
+          echo "parsed_issue_body="$(pwsh  .\\.github\\scripts\\issue_body_cleaner.ps1 )"" >> $GITHUB_ENV
 
       #The IssuesTypePredicter program receives as a parameter a json string with the issue content, then It's creating the json string in this section based in the issue body
       - name: Create Issue JSON String
         env:
           ISSUE_NUMBER: ${{github.event.issue.number}}
+          ISSUE_TITLE:  ${{github.event.issue.title}}
         if: env.analysis_response == 'Valid'
         id: create-issue-json
         run: |

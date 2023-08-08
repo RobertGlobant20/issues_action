@@ -34,6 +34,8 @@ jobs:
         run: |
           echo "Bad Issue Title Format"
           exit 1
+
+      #Remove the " character in the issue title and replaced with -
       - name: Remove conflicting chars
         uses: frabert/replace-string-action@v1.2
         id: remove_quotations
@@ -43,14 +45,11 @@ jobs:
           replace-with: '-'
           flags: g    
 
-      #Define a env variable with the issue_title so later can be used in a powershell script
-      - name: Set IssueTitle Variable
-        run: |
-          echo "IssueTitleEnvVar=${{steps.remove_quotations.outputs.replaced}}" >> $GITHUB_ENV
-
       #According to the issue_title returns a specific label 
       - name: Check Information
         id: check-info
+        env:
+          ISSUE_TITLE: ${{steps.remove_quotations.outputs.replaced}}
         run: |
           echo "content_analysis_response=$(pwsh .\\.github\\scripts\\title_analyzer.ps1)" >> $GITHUB_ENV
 
