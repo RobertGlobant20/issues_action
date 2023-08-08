@@ -18,9 +18,6 @@ foreach ($labelData in $labelsData) {
 
 #Response
 if($label -ne 'undefined') 
-    { 
-        #Write-Output ($label)
-        $env:TestVar
-    }
+    { Write-Output ($label)}
 else 
     { Write-Output ('Valid') }
