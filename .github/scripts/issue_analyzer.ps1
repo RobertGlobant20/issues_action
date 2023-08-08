@@ -12,8 +12,6 @@ param([string]$issueTemplateFile, [string]$issueContent, [int]$acceptableEmptyFi
 #--Processing--
 $issueTemplate = Get-Content -Raw -Path .github\$issueTemplateFile
 
-$env:ISSUE_BODY
-
 #Parse the template and issue
 $parsed_issue_content = Get_Parsed_Issue $issueContent
 $parsed_issue_template = Get_Parsed_Issue $issueTemplate
@@ -48,4 +46,5 @@ if (($analysis_result -eq " ") -or ($missingFields -le $acceptableEmptyFields)) 
 #--Output--
 #"Valid" if the issue has the necessary information
 # or string with section titles if information is missing
-$analysis_result
+#$analysis_result
+$env:ISSUE_BODY
