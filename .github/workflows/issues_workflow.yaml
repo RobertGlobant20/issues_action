@@ -51,7 +51,7 @@ jobs:
         env:
           ISSUE_TITLE_PARSED: ${{steps.remove_quotations.outputs.replaced}}
         run: |
-          echo "content_analysis_response=$(pwsh .\\.github\\scripts\\title_analyzer.ps1) "$ISSUE_TITLE_PARSED" )" >> $GITHUB_ENV
+          echo "content_analysis_response=$(pwsh .\\.github\\scripts\\title_analyzer.ps1) "${{env.ISSUE_TITLE_PARSED}}" )" >> $GITHUB_ENV
 
       #labels the issue based in the text returned in content_analysis_response var
       - name: Label issue
