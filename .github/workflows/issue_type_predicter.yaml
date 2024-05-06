@@ -68,7 +68,7 @@ jobs:
         if: env.analysis_response == 'Valid'
         uses: actions/checkout@v2
         with:
-          repository: DynamoDS/IssuesTypePredicter
+          repository: RobertGlobant20/IssuesTypePredicter
           path: IssuesTypePredicter
           ref: DYN-6651-Updating-NETSDK
 
