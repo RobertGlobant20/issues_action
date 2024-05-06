@@ -70,6 +70,13 @@ jobs:
         with:
           repository: DynamoDS/IssuesTypePredicter
           path: IssuesTypePredicter
+          ref: DYN-6651-Updating-NETSDK
+
+       # Setup dotnet
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0'
 
       #Builds the solution IssuesTypePredicter.sln (this contains two VS2019 ML.NET projects)
       - name: Build Issues Type Predicter 
