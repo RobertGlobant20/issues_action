@@ -83,7 +83,7 @@ jobs:
         if: env.analysis_response == 'Valid'
         run: | 
           dotnet build ./IssuesTypePredicter/IssuesTypePredicter.sln --configuration Release
-          cp ./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/bin/Release/netcoreapp3.1/MLModel.zip .
+          cp ./IssuesTypePredicter/IssuesTypePredicterML.ConsoleApp/bin/Release/net8.0/MLModel.zip .
       
       #Execute the IssuesTypePredicter program and pass as a parameter the json string (which contains the issue info)
       - name: Run Issues Type Predicter
